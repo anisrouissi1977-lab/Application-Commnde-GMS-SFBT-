@@ -5,68 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>GMS Visit Pro — SOSTEM</title>
 <style>
-:root {
-  --bg: #060f1e; --s1: #0d1f38; --s2: #112848; --s3: #1a3560;
-  --teal: #00c8e0; --teal2: #00a0b4; --gold: #f5a623; --gold2: #d4881a;
-  --green: #22d47a; --red: #ff4d6a; --orange: #ff8c42; --purple: #a78bfa;
-  --text: #dde8f5; --muted: #6b88a8;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-html,body{height:100%;overflow-x:hidden;}
-body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;min-height:100vh;}
-.app-header{ background:linear-gradient(135deg,var(--s2),var(--s3)); border-bottom:2px solid var(--teal); padding:14px 20px; display:flex;align-items:center;justify-content:space-between; position:sticky;top:0;z-index:200; box-shadow:0 4px 24px rgba(0,200,224,.15); }
-.app-logo{display:flex;align-items:center;gap:10px;}
-.app-logo .icon{font-size:1.5rem;}
-.app-logo h1{font-size:1.1rem;font-weight:700;letter-spacing:-0.3px;}
-.app-logo span{color:var(--teal);}
-.app-logo small{display:block;font-size:.65rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;}
-.nav-tabs{display:flex;gap:4px;background:var(--s1);border-bottom:1px solid rgba(255,255,255,.07);}
-.nav-tab{ flex:1;padding:12px 8px;text-align:center;cursor:pointer; font-size:.78rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase; color:var(--muted);border-bottom:3px solid transparent; transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px; }
-.nav-tab:hover{color:var(--text);background:rgba(255,255,255,.04);}
-.nav-tab.active{color:var(--teal);border-bottom-color:var(--teal);background:rgba(0,200,224,.06);}
-.page{display:none;padding:16px;max-width:720px;margin:0 auto;}
-.page.active{display:block;}
-.card{ background:var(--s1);border-radius:14px; border:1px solid rgba(255,255,255,.07); margin-bottom:14px;overflow:hidden; }
-.card-head{ display:flex;align-items:center;gap:10px; padding:14px 16px 12px; border-bottom:1px solid rgba(255,255,255,.06); background:rgba(255,255,255,.02); }
-.card-head .hicon{font-size:1.2rem;}
-.card-head h3{font-size:.9rem;font-weight:700;flex:1;}
-.card-head .badge-count{ background:var(--teal);color:#000; font-size:.65rem;font-weight:800; padding:2px 8px;border-radius:20px; }
-.card-body{padding:14px 16px;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
-.form-group{display:flex;flex-direction:column;gap:5px;}
-.form-group label{font-size:.72rem;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
-.form-group select,.form-group input[type=date],.form-group textarea{ background:var(--s2);border:1.5px solid rgba(255,255,255,.1); border-radius:9px;padding:10px 12px; color:var(--text);font-size:.9rem;font-family:inherit; outline:none;transition:border-color .2s;width:100%; }
-.form-group select:focus,.form-group input:focus,.form-group textarea:focus{ border-color:var(--teal); }
-.form-group textarea{resize:vertical;min-height:80px;}
-.search-select-wrap{position:relative;}
-.search-select-input{ background:var(--s2);border:1.5px solid rgba(255,255,255,.1); border-radius:9px;padding:10px 12px; color:var(--text);font-size:.9rem; outline:none;width:100%;cursor:pointer; transition:border-color .2s; }
-.search-select-input:focus{border-color:var(--teal);}
-.search-select-dropdown{ position:absolute;top:calc(100% + 4px);left:0;right:0; background:var(--s2);border:1.5px solid var(--teal); border-radius:10px;z-index:100;max-height:220px;overflow-y:auto; display:none;box-shadow:0 12px 30px rgba(0,0,0,.5); }
-.search-select-dropdown.open{display:block;}
-.dropdown-item{ padding:9px 12px;cursor:pointer;font-size:.85rem; border-bottom:1px solid rgba(255,255,255,.04); transition:background .15s; }
-.dropdown-item:hover{background:rgba(0,200,224,.12);}
-.dropdown-item .item-sub{font-size:.7rem;color:var(--muted);margin-top:1px;}
-.dropdown-empty{padding:12px;text-align:center;color:var(--muted);font-size:.85rem;}
-.brand-group{margin-bottom:12px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.07);}
-.brand-header{ display:flex;align-items:center;gap:8px; padding:9px 12px;font-weight:700;font-size:.82rem; letter-spacing:.5px;text-transform:uppercase; }
-.prod-row{ display:grid;grid-template-columns:1fr 130px 130px; align-items:center;gap:6px; padding:8px 12px; border-top:1px solid rgba(255,255,255,.04); background:rgba(0,0,0,.15); }
-.prod-row:nth-child(even){background:rgba(255,255,255,.02);}
-.prod-name{font-size:.82rem;color:var(--text);}
-.prod-format{font-size:.7rem;color:var(--muted);}
-.stepper{ display:flex;align-items:center;gap:4px; background:var(--bg);border:1px solid rgba(255,255,255,.1); border-radius:8px;padding:3px; }
-.stepper-btn{ width:30px;height:30px;border:none;border-radius:6px; cursor:pointer;font-size:1rem;font-weight:700; display:flex;align-items:center;justify-content:center; transition:all .15s;flex-shrink:0; }
-.stepper-btn.minus{background:rgba(255,77,106,.15);color:var(--red);}
-.stepper-btn.plus{background:rgba(34,212,122,.15);color:var(--green);}
-.stepper-val{ flex:1;text-align:center;font-weight:800;font-size:.95rem; font-variant-numeric:tabular-nums;min-width:24px; }
-.stepper-val.nonzero{color:var(--teal);}
-.stepper-label{font-size:.65rem;color:var(--muted);text-align:center;margin-top:3px;letter-spacing:.5px;}
-.btn-submit{ width:100%;padding:15px; background:linear-gradient(135deg,var(--teal),var(--teal2)); border:none;border-radius:12px; color:#000;font-size:1rem;font-weight:800; letter-spacing:.5px;cursor:pointer; display:flex;align-items:center;justify-content:center;gap:10px; transition:all .2s;box-shadow:0 4px 20px rgba(0,200,224,.3); margin-top:8px; }
-.toast{ position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px); background:var(--green);color:#000; padding:12px 24px;border-radius:30px; font-weight:700;font-size:.9rem; transition:transform .4s cubic-bezier(.175,.885,.32,1.275); z-index:999;display:flex;align-items:center;gap:8px; box-shadow:0 8px 30px rgba(34,212,122,.4);white-space:nowrap; }
-.toast.show{transform:translateX(-50%) translateY(0);}
-.selected-magasin{ background:rgba(0,200,224,.07);border:1px solid rgba(0,200,224,.25); border-radius:9px;padding:10px 12px;margin-top:4px;display:none; }
-.selected-magasin .sm-name{font-weight:700;font-size:.9rem;}
-.selected-magasin .sm-meta{font-size:.72rem;color:var(--muted);margin-top:2px;}
-@media(max-width:500px){ .form-row{grid-template-columns:1fr;} .prod-row{grid-template-columns:1fr;gap:4px;} .prod-row .stepper{justify-content:flex-start;} }
+/* J'ai conservé exactement tout ton CSS d'origine, je l'ai juste compacté pour gagner de la place */
+:root{--bg:#060f1e;--s1:#0d1f38;--s2:#112848;--s3:#1a3560;--teal:#00c8e0;--teal2:#00a0b4;--gold:#f5a623;--gold2:#d4881a;--green:#22d47a;--red:#ff4d6a;--orange:#ff8c42;--purple:#a78bfa;--text:#dde8f5;--muted:#6b88a8;--coca:#e62229;--fanta:#ff7d00;--sprite:#00a651;--boga:#1a56db}
+*{box-sizing:border-box;margin:0;padding:0}html,body{height:100%;overflow-x:hidden}body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;min-height:100vh}
+.app-header{background:linear-gradient(135deg,var(--s2),var(--s3));border-bottom:2px solid var(--teal);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 4px 24px rgba(0,200,224,.15)}
+.app-logo{display:flex;align-items:center;gap:10px}.app-logo .icon{font-size:1.5rem}.app-logo h1{font-size:1.1rem;font-weight:700;letter-spacing:-0.3px}.app-logo span{color:var(--teal)}.app-logo small{display:block;font-size:.65rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase}
+.nav-tabs{display:flex;gap:4px;background:var(--s1);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-tab{flex:1;padding:12px 8px;text-align:center;cursor:pointer;font-size:.78rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);border-bottom:3px solid transparent;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}
+.nav-tab:hover{color:var(--text);background:rgba(255,255,255,.04)}.nav-tab.active{color:var(--teal);border-bottom-color:var(--teal);background:rgba(0,200,224,.06)}
+.page{display:none;padding:16px;max-width:720px;margin:0 auto}.page.active{display:block}
+.card{background:var(--s1);border-radius:14px;border:1px solid rgba(255,255,255,.07);margin-bottom:14px;overflow:hidden}
+.card-head{display:flex;align-items:center;gap:10px;padding:14px 16px 12px;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02)}
+.card-head .hicon{font-size:1.2rem}.card-head h3{font-size:.9rem;font-weight:700;flex:1}.card-head .badge-count{background:var(--teal);color:#000;font-size:.65rem;font-weight:800;padding:2px 8px;border-radius:20px}
+.card-body{padding:14px 16px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}.form-row.full{grid-template-columns:1fr}
+.form-group{display:flex;flex-direction:column;gap:5px}.form-group label{font-size:.72rem;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+.form-group select,.form-group input[type=date],.form-group textarea{background:var(--s2);border:1.5px solid rgba(255,255,255,.1);border-radius:9px;padding:10px 12px;color:var(--text);font-size:.9rem;font-family:inherit;outline:none;transition:border-color .2s;width:100%}
+.form-group select:focus,.form-group input:focus,.form-group textarea:focus{border-color:var(--teal)}.form-group select option{background:var(--s2)}.form-group textarea{resize:vertical;min-height:80px}
+.search-select-wrap{position:relative}.search-select-input{background:var(--s2);border:1.5px solid rgba(255,255,255,.1);border-radius:9px;padding:10px 12px;color:var(--text);font-size:.9rem;outline:none;width:100%;cursor:pointer;transition:border-color .2s}
+.search-select-input:focus{border-color:var(--teal)}.search-select-dropdown{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--s2);border:1.5px solid var(--teal);border-radius:10px;z-index:100;max-height:220px;overflow-y:auto;display:none;box-shadow:0 12px 30px rgba(0,0,0,.5)}.search-select-dropdown.open{display:block}
+.dropdown-item{padding:9px 12px;cursor:pointer;font-size:.85rem;border-bottom:1px solid rgba(255,255,255,.04);transition:background .15s}.dropdown-item:hover{background:rgba(0,200,224,.12)}.dropdown-item .item-sub{font-size:.7rem;color:var(--muted);margin-top:1px}.dropdown-empty{padding:12px;text-align:center;color:var(--muted);font-size:.85rem}
+.brand-group{margin-bottom:12px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.07)}.brand-header{display:flex;align-items:center;gap:8px;padding:9px 12px;font-weight:700;font-size:.82rem;letter-spacing:.5px;text-transform:uppercase}.brand-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.prod-row{display:grid;grid-template-columns:1fr 130px 130px;align-items:center;gap:6px;padding:8px 12px;border-top:1px solid rgba(255,255,255,.04);background:rgba(0,0,0,.15)}.prod-row:nth-child(even){background:rgba(255,255,255,.02)}.prod-name{font-size:.82rem;color:var(--text)}.prod-format{font-size:.7rem;color:var(--muted)}
+.stepper{display:flex;align-items:center;gap:4px;background:var(--bg);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:3px}.stepper-btn{width:30px;height:30px;border:none;border-radius:6px;cursor:pointer;font-size:1rem;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.stepper-btn.minus{background:rgba(255,77,106,.15);color:var(--red)}.stepper-btn.minus:hover{background:var(--red);color:#fff}.stepper-btn.plus{background:rgba(34,212,122,.15);color:var(--green)}.stepper-btn.plus:hover{background:var(--green);color:#fff}
+.stepper-val{flex:1;text-align:center;font-weight:800;font-size:.95rem;font-variant-numeric:tabular-nums;min-width:24px}.stepper-val.nonzero{color:var(--teal)}.stepper-label{font-size:.65rem;color:var(--muted);text-align:center;margin-top:3px;letter-spacing:.5px}
+.btn-submit{width:100%;padding:15px;background:linear-gradient(135deg,var(--teal),var(--teal2));border:none;border-radius:12px;color:#000;font-size:1rem;font-weight:800;letter-spacing:.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;box-shadow:0 4px 20px rgba(0,200,224,.3);margin-top:8px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--green);color:#000;padding:12px 24px;border-radius:30px;font-weight:700;font-size:.9rem;transition:transform .4s cubic-bezier(.175,.885,.32,1.275);z-index:999;display:flex;align-items:center;gap:8px;box-shadow:0 8px 30px rgba(34,212,122,.4);white-space:nowrap}.toast.show{transform:translateX(-50%) translateY(0)}
+.selected-magasin{background:rgba(0,200,224,.07);border:1px solid rgba(0,200,224,.25);border-radius:9px;padding:10px 12px;margin-top:4px;display:none}.selected-magasin .sm-name{font-weight:700;font-size:.9rem}.selected-magasin .sm-meta{font-size:.72rem;color:var(--muted);margin-top:2px}
+@media(max-width:500px){.form-row{grid-template-columns:1fr}.prod-row{grid-template-columns:1fr;gap:4px}.prod-row .stepper{justify-content:flex-start}}
+/* CSS Dashboard & Observations (conservé) */
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+.kpi-card{background:var(--s1);border-radius:12px;padding:14px 16px;border:1px solid rgba(255,255,255,.06);border-left:4px solid var(--teal);display:flex;align-items:center;gap:12px;}
+.kpi-icon{font-size:1.6rem;}
+.kpi-num{font-size:1.5rem;font-weight:900;}
+.kpi-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;}
+.obs-volet-tabs{display:flex;background:var(--s1);border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.07);margin-bottom:16px;}
+.obs-vtab{flex:1;padding:11px;text-align:center;font-weight:700;font-size:.78rem;cursor:pointer;color:var(--muted);}
+.obs-vtab.active{background:rgba(0,200,224,.06);color:var(--teal);}
+.sm-totals{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+.sm-tot{background:var(--s1);border-radius:12px;padding:14px;text-align:center;border:1px solid rgba(255,255,255,.06);border-top:3px solid var(--teal);}
+.sm-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.sm-table th, .sm-table td{padding:10px;border-bottom:1px solid rgba(255,255,255,.04);text-align:left;}
 </style>
 </head>
 <body>
@@ -83,8 +62,10 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 </div>
 
 <div class="nav-tabs">
-  <div class="nav-tab active" onclick="switchTab('questionnaire')" id="tab-questionnaire">📋 Questionnaire</div>
-  <div class="nav-tab" onclick="switchTab('dashboard')" id="tab-dashboard">📊 Dashboard</div>
+  <div class="nav-tab active" onclick="switchTab('questionnaire')" id="tab-questionnaire">📋 Question.</div>
+  <div class="nav-tab" onclick="switchTab('dashboard')" id="tab-dashboard">📊 Dashb.</div>
+  <div class="nav-tab" onclick="switchTab('observations')" id="tab-observations">💬 Obs.</div>
+  <div class="nav-tab" onclick="switchTab('stats')" id="tab-stats">🏪 Stats</div>
 </div>
 
 <div class="page active" id="page-questionnaire">
@@ -96,15 +77,12 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
           <label>🧑‍💼 Commercial</label>
           <select id="sel-commercial"><option value="">— Sélectionner —</option></select>
         </div>
-        <div class="form-group">
-          <label>📅 Date</label>
-          <input type="date" id="sel-date">
-        </div>
+        <div class="form-group"><label>📅 Date</label><input type="date" id="sel-date"></div>
       </div>
       <div style="margin-top:10px;">
-        <label style="font-size:.72rem;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px;">🏪 Magasin Visité</label>
-        <div class="search-select-wrap">
-          <input type="text" class="search-select-input" id="mag-input" placeholder="🔍 Taper pour rechercher un magasin..." autocomplete="off" onclick="openMagDropdown()">
+        <label style="font-size:.72rem;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase;">🏪 Magasin Visité</label>
+        <div class="search-select-wrap" style="margin-top:5px;">
+          <input type="text" class="search-select-input" id="mag-input" placeholder="🔍 Taper pour rechercher un magasin..." autocomplete="off">
           <div class="search-select-dropdown" id="mag-dropdown"></div>
         </div>
         <div class="selected-magasin" id="selected-mag">
@@ -123,62 +101,93 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="card">
     <div class="card-head"><span class="hicon">📝</span><h3>Observations & Remarques</h3></div>
     <div class="card-body">
-      <div class="form-group">
-        <textarea id="obs-text" placeholder="Ex: Rupture sur BOGA, facing insuffisant..." rows="4"></textarea>
-      </div>
+      <textarea id="obs-text" placeholder="Ex: Rupture sur BOGA, facing insuffisant..." style="width:100%;background:var(--s2);border:1.5px solid rgba(255,255,255,.1);border-radius:9px;padding:10px;color:#fff;min-height:80px;font-family:inherit;"></textarea>
     </div>
   </div>
 
   <button class="btn-submit" onclick="submitForm()">✅ Soumettre la Visite</button>
-  <div style="height:30px;"></div>
 </div>
 
 <div class="page" id="page-dashboard">
-    <div class="card">
-        <div class="card-head"><span class="hicon">📊</span><h3>Dashboard</h3></div>
-        <div class="card-body">
-            <p style="color:var(--muted);text-align:center;padding:20px;">Les visites s'afficheront ici après la configuration de la base de données.</p>
-        </div>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-icon">📋</div><div><div class="kpi-num" id="dash-tot-visites">0</div><div class="kpi-label">Visites</div></div></div>
+    <div class="kpi-card" style="border-left-color:var(--orange)"><div class="kpi-icon">📈</div><div><div class="kpi-num" id="dash-tot-aug">0</div><div class="kpi-label">À Augmenter</div></div></div>
+  </div>
+  <div class="card">
+    <div class="card-head"><span class="hicon">📋</span><h3>Historique des visites</h3></div>
+    <div class="card-body" id="dash-history" style="overflow-x:auto;">
+       <p style="color:var(--muted);text-align:center;">Vos visites sauvegardées s'afficheront ici.</p>
     </div>
+  </div>
+</div>
+
+<div class="page" id="page-observations">
+  <div class="obs-volet-tabs">
+    <div class="obs-vtab active">🧑‍💼 Volet Commercial</div>
+    <div class="obs-vtab">🏭 Volet Usine</div>
+  </div>
+  <div class="card">
+    <div class="card-head"><span class="hicon">💬</span><h3>Liste des observations</h3></div>
+    <div class="card-body">
+       <p style="color:var(--muted);text-align:center;">Aucune observation enregistrée pour le moment.</p>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-stats">
+  <div class="sm-totals">
+    <div class="sm-tot"><div class="sm-tot-num">0</div><div class="sm-tot-label">👁 Qté Observée</div></div>
+    <div class="sm-tot" style="border-top-color:var(--purple)"><div class="sm-tot-num">0</div><div class="sm-tot-label">📋 Qté Proposée</div></div>
+    <div class="sm-tot" style="border-top-color:var(--orange)"><div class="sm-tot-num">0</div><div class="sm-tot-label">📈 Qté à Augmenter</div></div>
+  </div>
+  <div class="card">
+    <div class="card-head"><span class="hicon">🏪</span><h3>Détail par Magasin</h3></div>
+    <div class="card-body" style="overflow-x:auto;">
+      <table class="sm-table">
+        <thead><tr><th>Magasin</th><th>Enseigne</th><th>Visites</th><th>📈 Aug.</th></tr></thead>
+        <tbody id="stats-table-body">
+           <tr><td colspan="4" style="text-align:center;color:var(--muted);">Aucune donnée à afficher.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast">✅ Visite enregistrée avec succès !</div>
 
 <script>
-const COMMERCIAUX = [{"nom":"MOURAD BAHLOUSS","usine":"STBN"},{"nom":"MOUNIR BEN ALI","usine":"SGBIA"},{"nom":"AHMED ZAKRAOUI","usine":"SGBIA"},{"nom":"MAKREM KHORCHFI","usine":"SGBIA"},{"nom":"SABRI BEN HSSINE","usine":"SGBIA"},{"nom":"MOHAMED CHAOUACHI","usine":"SGBIA"},{"nom":"MAHA CHTOUROU","usine":"STBG"},{"nom":"KHALED MAHMOUDI","usine":"CHARGUIA"},{"nom":"MONDHER BEN AMOR","usine":"CHARGUIA"},{"nom":"MOURAD HAMMAMI","usine":"CHARGUIA"},{"nom":"MOHAMED GHORBEL","usine":"SFAX"},{"nom":"MOHAMED SAADIYA","usine":"SFAX"},{"nom":"RAMI HAYDER","usine":"SFAX"}];
-
-const PRODUITS = [{"id":"apla_boite_24cl","nom":"APLA BOITE 24CL","marque":"APLA","color":"#8b5cf6"},{"id":"apla_pet_100cl","nom":"APLA PET 100CL","marque":"APLA","color":"#8b5cf6"},{"id":"apla_pet_150cl","nom":"APLA PET 150CL","marque":"APLA","color":"#8b5cf6"},{"id":"apla_pet_50cl","nom":"APLA PET 50CL","marque":"APLA","color":"#8b5cf6"},{"id":"boga_cidre_boite_24c","nom":"BOGA CIDRE BOITE 24CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_cidre_pet_100cl","nom":"BOGA CIDRE PET 100CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_cidre_pet_12x30","nom":"BOGA CIDRE PET 12X30CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_cidre_pet_150cl","nom":"BOGA CIDRE PET 150CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_cidre_pet_50cl","nom":"BOGA CIDRE PET 50CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_cidre_sans_sucr","nom":"BOGA CIDRE SANS SUCRES PET 1 L","marque":"BOGA","color":"#1a56db"},{"id":"boga_cidre_ver_ret_1","nom":"BOGA CIDRE VER.RET 100CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_fruits_rouges_b","nom":"BOGA FRUITS ROUGES BOITES 24 CL*24","marque":"BOGA","color":"#1a56db"},{"id":"boga_fruits_rouges_p","nom":"BOGA FRUITS ROUGES PET 6X30 CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_limonade_boite_","nom":"BOGA LIMONADE BOITE 24CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_limonade_pet_10","nom":"BOGA LIMONADE PET 100CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_limonade_pet_12","nom":"BOGA LIMONADE PET 12X30CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_limonade_pet_15","nom":"BOGA LIMONADE PET 150CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_limonade_pet_50","nom":"BOGA LIMONADE PET 50CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_limonade_sans_s","nom":"BOGA LIMONADE SANS SUCRE PET 6 X30 CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_limonade_ver_re","nom":"BOGA LIMONADE VER.RET 100CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_menthe_boite_24","nom":"BOGA MENTHE BOITE 24CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_menthe_pet_100c","nom":"BOGA MENTHE PET 100CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_menthe_pet_6x50","nom":"BOGA MENTHE PET 6X50CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_mojito_pet_12x_","nom":"BOGA MOJITO PET 12X 0.5L","marque":"BOGA","color":"#1a56db"},{"id":"boga_mojito_pet_6_x_","nom":"BOGA MOJITO PET 6 X 1 L","marque":"BOGA","color":"#1a56db"},{"id":"boga_mojito_pet_6x50","nom":"BOGA MOJITO PET 6X50CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_peche_abricot_b","nom":"BOGA PECHE ABRICOT BOITES 24 CL*24","marque":"BOGA","color":"#1a56db"},{"id":"boga_peche_abricot_p","nom":"BOGA PECHE ABRICOT PET 12X30 CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_peche_abricot_p","nom":"BOGA PECHE ABRICOT PET 6X30 CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_sans_sucre_boit","nom":"BOGA SANS SUCRE BOITE 24CL","marque":"BOGA","color":"#1a56db"},{"id":"boga_sans_sucre_pet_","nom":"BOGA SANS SUCRE PET 6X1L","marque":"BOGA","color":"#1a56db"},{"id":"celestia_boite_24cl_","nom":"CELESTIA BOITE 24CL 4X6","marque":"CELESTIA","color":"#06b6d4"},{"id":"celestia_citron_boit","nom":"CELESTIA CITRON BOITE 24 CL","marque":"CELESTIA","color":"#06b6d4"},{"id":"celestia_citron_ver_","nom":"CELESTIA CITRON VER.JET 25CL 4X6","marque":"CELESTIA","color":"#06b6d4"},{"id":"celestia_fraise_gren","nom":"CELESTIA FRAISE GRENADE BOITE 24 CL","marque":"CELESTIA","color":"#06b6d4"},{"id":"celestia_fraise_gren","nom":"CELESTIA FRAISE GRENADE VER.JET 25CL 4X6","marque":"CELESTIA","color":"#06b6d4"},{"id":"celestia_mojito_boit","nom":"CELESTIA MOJITO BOITE 24 CL","marque":"CELESTIA","color":"#06b6d4"},{"id":"celestia_mojito_ver_","nom":"CELESTIA MOJITO VER.JET 25CL 4X6","marque":"CELESTIA","color":"#06b6d4"},{"id":"celestia_peche_ver_j","nom":"CELESTIA PECHE VER.JET 25CL 4X6","marque":"CELESTIA","color":"#06b6d4"},{"id":"celestia_ver_jet_25c","nom":"CELESTIA VER.JET 25CL 4X6","marque":"CELESTIA","color":"#06b6d4"},{"id":"coca_cola_boite_24cl","nom":"COCA-COLA BOITE 24CL","marque":"COCA-COLA","color":"#e62229"},{"id":"coca_cola_pet_100cl","nom":"COCA-COLA PET 100CL","marque":"COCA-COLA","color":"#e62229"},{"id":"coca_cola_pet_100cl_","nom":"COCA-COLA PET 100CL+25CL G","marque":"COCA-COLA","color":"#e62229"},{"id":"coca_cola_pet_12x_30","nom":"COCA-COLA PET 12X 30 CL","marque":"COCA-COLA","color":"#e62229"},{"id":"coca_cola_pet_150cl","nom":"COCA-COLA PET 150CL","marque":"COCA-COLA","color":"#e62229"},{"id":"coca_cola_pet_150cl_","nom":"COCA-COLA PET 150CL+25CL G","marque":"COCA-COLA","color":"#e62229"},{"id":"coca_cola_pet_50cl","nom":"COCA-COLA PET 50CL","marque":"COCA-COLA","color":"#e62229"},{"id":"coca_cola_ver_ret_10","nom":"COCA-COLA VER.RET 100CL","marque":"COCA-COLA","color":"#e62229"},{"id":"coca_cola_zero_boite","nom":"COCA-COLA ZERO BOITE 24CL","marque":"COCA-COLA","color":"#e62229"},{"id":"coca_cola_zero_pet_1","nom":"COCA-COLA ZERO PET 100CL","marque":"COCA-COLA","color":"#e62229"},{"id":"coca_cola_zero_pet_6","nom":"COCA-COLA ZERO PET 6X30CL","marque":"COCA-COLA","color":"#e62229"},{"id":"coca_cola_zero_pet_6","nom":"COCA-COLA ZERO PET 6X50CL","marque":"COCA-COLA","color":"#e62229"},{"id":"cristaline_1_l","nom":"CRISTALINE 1 L","marque":"CRISTALINE","color":"#3b82f6"},{"id":"cristaline_6emeg_pet","nom":"CRISTALINE 6EMEG PET 6X1,5 L","marque":"CRISTALINE","color":"#3b82f6"},{"id":"cristaline_pet_150cl","nom":"CRISTALINE PET 150CL","marque":"CRISTALINE","color":"#3b82f6"},{"id":"cristaline_pet_2l","nom":"CRISTALINE PET 2L","marque":"CRISTALINE","color":"#3b82f6"},{"id":"cristaline_pet_50cl","nom":"CRISTALINE PET 50CL","marque":"CRISTALINE","color":"#3b82f6"},{"id":"fanta_citron_boite_2","nom":"FANTA CITRON BOITE 24CL","marque":"FANTA","color":"#ff7d00"},{"id":"fanta_citron_pet_100","nom":"FANTA CITRON PET 100CL","marque":"FANTA","color":"#ff7d00"},{"id":"fanta_citron_pet_150","nom":"FANTA CITRON PET 150CL","marque":"FANTA","color":"#ff7d00"},{"id":"fanta_citron_pet_30c","nom":"FANTA CITRON PET 30CL","marque":"FANTA","color":"#ff7d00"},{"id":"fanta_citron_pet_6x3","nom":"FANTA CITRON PET 6X30CL","marque":"FANTA","color":"#ff7d00"},{"id":"fanta_orange_boite_2","nom":"FANTA ORANGE BOITE 24CL","marque":"FANTA","color":"#ff7d00"},{"id":"fanta_orange_pet_100","nom":"FANTA ORANGE PET 100CL","marque":"FANTA","color":"#ff7d00"},{"id":"fanta_orange_pet_12x","nom":"FANTA ORANGE PET 12X30CL","marque":"FANTA","color":"#ff7d00"},{"id":"fanta_orange_pet_150","nom":"FANTA ORANGE PET 150CL","marque":"FANTA","color":"#ff7d00"},{"id":"fanta_orange_pet_50c","nom":"FANTA ORANGE PET 50CL","marque":"FANTA","color":"#ff7d00"},{"id":"fanta_orange_ver_ret","nom":"FANTA ORANGE VER.RET 100CL","marque":"FANTA","color":"#ff7d00"},{"id":"fanta_pomme_boite_24","nom":"FANTA POMME BOITE 24CL","marque":"FANTA","color":"#ff7d00"},{"id":"fanta_pomme_pet_100c","nom":"FANTA POMME PET 100CL","marque":"FANTA","color":"#ff7d00"},{"id":"fanta_pomme_pet_150c","nom":"FANTA POMME PET 150CL","marque":"FANTA","color":"#ff7d00"},{"id":"fanta_pomme_pet_6x30","nom":"FANTA POMME PET 6X30CL","marque":"FANTA","color":"#ff7d00"},{"id":"fanta_tropical_pet_6","nom":"FANTA TROPICAL PET 6 X 1.5 L","marque":"FANTA","color":"#ff7d00"},{"id":"fanta_tropical_pet_6","nom":"FANTA TROPICAL PET 6X50CL","marque":"FANTA","color":"#ff7d00"},{"id":"garci_gaz__pet_0_5l","nom":"GARCI GAZ. PET 0,5L","marque":"GARCI","color":"#14b8a6"},{"id":"garci_gaz__pet_1l","nom":"GARCI GAZ. PET 1L","marque":"GARCI","color":"#14b8a6"},{"id":"garci_nat_pet_1_l","nom":"GARCI NAT PET 1 L","marque":"GARCI","color":"#14b8a6"},{"id":"jektiss_gaz_pet_0_5l","nom":"JEKTISS GAZ PET 0.5L","marque":"JEKTISS","color":"#f97316"},{"id":"jektiss_gaz_pet_1l","nom":"JEKTISS GAZ PET 1L","marque":"JEKTISS","color":"#f97316"},{"id":"jektiss_pet__1l","nom":"JEKTISS PET  1L","marque":"JEKTISS","color":"#f97316"},{"id":"jektiss_plate_pet_12","nom":"JEKTISS PLATE PET 12X0.5L","marque":"JEKTISS","color":"#f97316"},{"id":"jus_stil_ananas_24x2","nom":"JUS STIL ANANAS 24X20CL","marque":"STIL","color":"#10b981"},{"id":"jus_stil_bnino_tp_fr","nom":"JUS STIL BNINO TP FRAISE BANANE 24X20CL","marque":"STIL","color":"#10b981"},{"id":"jus_stil_bnino_tp_or","nom":"JUS STIL BNINO TP ORANGE BANANE 24X20 CL","marque":"STIL","color":"#10b981"},{"id":"jus_stil_coktail_24x","nom":"JUS STIL COKTAIL 24X20CL","marque":"STIL","color":"#10b981"},{"id":"jus_stil_mangue_24x2","nom":"JUS STIL MANGUE 24X20CL","marque":"STIL","color":"#10b981"},{"id":"jus_stil_orange_24x2","nom":"JUS STIL ORANGE 24X20CL","marque":"STIL","color":"#10b981"},{"id":"jus_stil_peche_24x20","nom":"JUS STIL PECHE 24X20CL","marque":"STIL","color":"#10b981"},{"id":"jus_stil_pet_bnino_t","nom":"JUS STIL PET BNINO TROPICAL 1 L","marque":"STIL","color":"#10b981"},{"id":"jus_stil_pet_bnino_t","nom":"JUS STIL PET BNINO TROPICAL 25 CL","marque":"STIL","color":"#10b981"},{"id":"jus_stil_pet_cocktai","nom":"JUS STIL PET COCKTAIL 1L","marque":"STIL","color":"#10b981"},{"id":"jus_stil_pet_cocktai","nom":"JUS STIL PET COCKTAIL 2L","marque":"STIL","color":"#10b981"},{"id":"jus_stil_pet_energy_","nom":"JUS STIL PET ENERGY COCKTAIL 25 CL","marque":"STIL","color":"#10b981"},{"id":"jus_stil_pet_energy_","nom":"JUS STIL PET ENERGY MANGUE 12X25 CL","marque":"STIL","color":"#10b981"},{"id":"jus_stil_pet_energy_","nom":"JUS STIL PET ENERGY ORANGE 25 CL","marque":"STIL","color":"#10b981"},{"id":"jus_stil_pet_mangue_","nom":"JUS STIL PET MANGUE 1L","marque":"STIL","color":"#10b981"},{"id":"jus_stil_pet_orange_","nom":"JUS STIL PET ORANGE 1L","marque":"STIL","color":"#10b981"},{"id":"jus_stil_pet_orange_","nom":"JUS STIL PET ORANGE 2L","marque":"STIL","color":"#10b981"},{"id":"jus_stil_tp_bnino_fr","nom":"JUS STIL TP BNINO FRUTTO 24X20 CL","marque":"STIL","color":"#10b981"},{"id":"jus_stil_tp_bnino_tr","nom":"JUS STIL TP BNINO TROPICAL 24X20 CL","marque":"STIL","color":"#10b981"},{"id":"marwa_pet_150cl","nom":"MARWA PET 150CL","marque":"MARWA","color":"#ec4899"},{"id":"marwa_pet_50cl","nom":"MARWA PET 50CL","marque":"MARWA","color":"#ec4899"},{"id":"melliti_pet_0_5_l","nom":"MELLITI PET 0.5 L","marque":"MELLITI","color":"#84cc16"},{"id":"melliti_pet_150cl","nom":"MELLITI PET 150CL","marque":"MELLITI","color":"#84cc16"},{"id":"orangina_jaune_boite","nom":"ORANGINA JAUNE BOITE 24CL","marque":"ORANGINA","color":"#f59e0b"},{"id":"orangina_jaune_pet_1","nom":"ORANGINA JAUNE PET 120CL","marque":"ORANGINA","color":"#f59e0b"},{"id":"orangina_jaune_pet_4","nom":"ORANGINA JAUNE PET 40CL","marque":"ORANGINA","color":"#f59e0b"},{"id":"orangina_jaune_pet_8","nom":"ORANGINA JAUNE PET 80CL","marque":"ORANGINA","color":"#f59e0b"},{"id":"orangina_zero_boite_","nom":"ORANGINA ZERO BOITE 24CL","marque":"ORANGINA","color":"#f59e0b"},{"id":"orangina_zero_pet_40","nom":"ORANGINA ZERO PET 40CL","marque":"ORANGINA","color":"#f59e0b"},{"id":"orangina_zero_pet_80","nom":"ORANGINA ZERO PET 80CL","marque":"ORANGINA","color":"#f59e0b"},{"id":"safia_pet_0_5_l","nom":"SAFIA PET 0.5 L","marque":"SAFIA","color":"#0ea5e9"},{"id":"safia_pet_1_5_l","nom":"SAFIA PET 1.5 L","marque":"SAFIA","color":"#0ea5e9"},{"id":"safia_vc_90cl","nom":"SAFIA VC 90CL","marque":"SAFIA","color":"#0ea5e9"},{"id":"schweppes_agrume_pet","nom":"SCHWEPPES AGRUME PET 100CL","marque":"SCHWEPPES","color":"#6b21a8"},{"id":"schweppes_agrume_pet","nom":"SCHWEPPES AGRUME PET 6 X 50 CL","marque":"SCHWEPPES","color":"#6b21a8"},{"id":"schweppes_agrumes_bo","nom":"SCHWEPPES AGRUMES BOITE 24 X 24 CL","marque":"SCHWEPPES","color":"#6b21a8"},{"id":"schweppes_ananas_boi","nom":"SCHWEPPES ANANAS BOITES 24X24 CL","marque":"SCHWEPPES","color":"#6b21a8"},{"id":"schweppes_ananas_coc","nom":"SCHWEPPES ANANAS COCO PET 6X90 CL","marque":"SCHWEPPES","color":"#6b21a8"},{"id":"schweppes_ananas_pet","nom":"SCHWEPPES ANANAS PET 100CL","marque":"SCHWEPPES","color":"#6b21a8"},{"id":"schweppes_ananas_pet","nom":"SCHWEPPES ANANAS PET 150CL","marque":"SCHWEPPES","color":"#6b21a8"},{"id":"schweppes_ananas_pet","nom":"SCHWEPPES ANANAS PET 6X140CL","marque":"SCHWEPPES","color":"#6b21a8"},{"id":"schweppes_ananas_pet","nom":"SCHWEPPES ANANAS PET 6X90CL","marque":"SCHWEPPES","color":"#6b21a8"},{"id":"schweppes_citron_boi","nom":"SCHWEPPES CITRON BOITE 24 X 24 CL","marque":"SCHWEPPES","color":"#6b21a8"},{"id":"schweppes_citron_pet","nom":"SCHWEPPES CITRON PET 6X90CL","marque":"SCHWEPPES","color":"#6b21a8"},{"id":"schweppes_grenade_bo","nom":"SCHWEPPES GRENADE BOITES 24X24 CL","marque":"SCHWEPPES","color":"#6b21a8"},{"id":"schweppes_grenadine_","nom":"SCHWEPPES GRENADINE PET 6X90 CL","marque":"SCHWEPPES","color":"#6b21a8"},{"id":"schweppes_indian_ton","nom":"SCHWEPPES INDIAN TONIC PET 6X90CL","marque":"SCHWEPPES","color":"#6b21a8"},{"id":"schweppes_pina_colad","nom":"SCHWEPPES PINA COLADA BOITES 24X24 CL","marque":"SCHWEPPES","color":"#6b21a8"},{"id":"schweppes_tonic_boit","nom":"SCHWEPPES TONIC BOITE 24 CL","marque":"SCHWEPPES","color":"#6b21a8"},{"id":"sprite_au_jus_boite_","nom":"SPRITE AU JUS BOITE 24CL","marque":"SPRITE","color":"#00a651"},{"id":"sprite_au_jus_pet_10","nom":"SPRITE AU JUS PET 100CL","marque":"SPRITE","color":"#00a651"},{"id":"sprite_au_jus_pet_15","nom":"SPRITE AU JUS PET 150CL","marque":"SPRITE","color":"#00a651"},{"id":"sprite_au_jus_pet_50","nom":"SPRITE AU JUS PET 50CL","marque":"SPRITE","color":"#00a651"}];
-
-const MAGASINS_RAW = [{"nom":"AZIZA DE COMMERCE BOUCHEMMA","enseigne":"AZIZA"},{"nom":"AZIZA DE COMMERCE DE DETAIL","enseigne":"AZIZA"},{"nom":"AZIZA DE COMMERCE DE DETAIL BEN AROUS","enseigne":"AZIZA"},{"nom":"CARREFOUR","enseigne":"UHD"},{"nom":"CARREFOUR AIN ZAGHOUAN NORD “82”","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS (BAB JAZIRA)","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS (MORNAGUIA)","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS AIN ZAGHOUAN AL WAHAT “95”","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS DOUZ","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS EL MANAR","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS FOUCHANA","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS HAMMAM LIF 2 220","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS JDAIDA","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS JEDEIDA","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS L AOUINA","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS MARSA ERRIADH","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS MENZEL CHAKER","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS MENZEL TEMIME","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS MHAMDIA","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS ORANGE","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS ORANGE BORJ LOUZIR","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS ORANGE H.LIF","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS SIDI BOUZID","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS SILVER MALL","enseigne":"UHD"},{"nom":"CARREFOUR EXPRESS YESMINE","enseigne":"UHD"},{"nom":"CARREFOUR GABES","enseigne":"UHD"},{"nom":"CARREFOUR JAMMEL","enseigne":"UHD"},{"nom":"CARREFOUR MARKET (SFAX EL JADIDA)","enseigne":"UHD"},{"nom":"CARREFOUR MARKET (SOUSSE)","enseigne":"UHD"},{"nom":"CARREFOUR MARKET AFRICA MALL ARIANA","enseigne":"UHD"},{"nom":"CARREFOUR MARKET AVICENNE","enseigne":"UHD"},{"nom":"CARREFOUR MARKET BEJA 3","enseigne":"UHD"},{"nom":"CARREFOUR MARKET BEN AROUS","enseigne":"UHD"},{"nom":"CARREFOUR MARKET BENI KHALLED","enseigne":"UHD"},{"nom":"CARREFOUR MARKET BIZERTE","enseigne":"UHD"},{"nom":"CARREFOUR MARKET BIZERTE EL DAHECH","enseigne":"UHD"},{"nom":"CARREFOUR MARKET BNI KHALED","enseigne":"UHD"},{"nom":"CARREFOUR MARKET BORJ CEDRIA","enseigne":"UHD"},{"nom":"CARREFOUR MARKET BORJ LOUZIR","enseigne":"UHD"},{"nom":"CARREFOUR MARKET BOUMHEL","enseigne":"UHD"},{"nom":"CARREFOUR MARKET BOUSALEM","enseigne":"UHD"},{"nom":"CARREFOUR MARKET BOUSSELEM","enseigne":"UHD"},{"nom":"CARREFOUR MARKET CENTRE VILLE MAHDIA","enseigne":"UHD"},{"nom":"CARREFOUR MARKET CHIHIA","enseigne":"UHD"},{"nom":"CARREFOUR MARKET CHOTRANA","enseigne":"UHD"},{"nom":"CARREFOUR MARKET CHOTRANA EL BASSATINE","enseigne":"UHD"},{"nom":"CARREFOUR MARKET DAR FADHAL","enseigne":"UHD"},{"nom":"CARREFOUR MARKET EL AFRAN","enseigne":"UHD"},{"nom":"CARREFOUR MARKET EL GHAZALA","enseigne":"UHD"},{"nom":"CARREFOUR MARKET EL MOUROUJ 2","enseigne":"UHD"},{"nom":"CARREFOUR MARKET EL MOUROUJ 4","enseigne":"UHD"},{"nom":"CARREFOUR MARKET ENNASR","enseigne":"UHD"},{"nom":"CARREFOUR MARKET GABES","enseigne":"UHD"},{"nom":"CARREFOUR MARKET GAFSA","enseigne":"UHD"},{"nom":"CARREFOUR MARKET GAFSA KSAR","enseigne":"UHD"},{"nom":"CARREFOUR MARKET GAMARTH","enseigne":"UHD"},{"nom":"CARREFOUR MARKET GROMBALIA","enseigne":"UHD"},{"nom":"CARREFOUR MARKET HAMMAMET MREZGUA","enseigne":"UHD"},{"nom":"CARREFOUR MARKET HAMMEM SOUSSE","enseigne":"UHD"},{"nom":"CARREFOUR MARKET INTILAKA","enseigne":"UHD"},{"nom":"CARREFOUR MARKET JAAFAR RAOUED","enseigne":"UHD"},{"nom":"CARREFOUR MARKET JAAFER","enseigne":"UHD"},{"nom":"CARREFOUR MARKET JAWHARA","enseigne":"UHD"},{"nom":"CARREFOUR MARKET KEBILI","enseigne":"UHD"},{"nom":"CARREFOUR MARKET KHEZAMA","enseigne":"UHD"},{"nom":"CARREFOUR MARKET KSAR HLEL","enseigne":"UHD"},{"nom":"CARREFOUR MARKET KSAR SAID","enseigne":"UHD"},{"nom":"CARREFOUR MARKET KSAR SAID-3","enseigne":"UHD"},{"nom":"CARREFOUR MARKET KSOUR ESSAF","enseigne":"UHD"},{"nom":"CARREFOUR MARKET KSOUR ESSEF","enseigne":"UHD"},{"nom":"CARREFOUR MARKET LA FAYETTE","enseigne":"UHD"},{"nom":"CARREFOUR MARKET LAC","enseigne":"UHD"},{"nom":"CARREFOUR MARKET LAC 2","enseigne":"UHD"},{"nom":"CARREFOUR MARKET MANAR EL AREM","enseigne":"UHD"},{"nom":"CARREFOUR MARKET MANOUBA","enseigne":"UHD"},{"nom":"CARREFOUR MARKET MEDINA JADIDA","enseigne":"UHD"},{"nom":"CARREFOUR MARKET MENZEH 9","enseigne":"UHD"},{"nom":"CARREFOUR MARKET MENZEL BOURGUIBA","enseigne":"UHD"},{"nom":"CARREFOUR MARKET MIDOUN","enseigne":"UHD"},{"nom":"CARREFOUR MARKET MOUROUJ 5","enseigne":"UHD"},{"nom":"CARREFOUR MARKET NABEUL","enseigne":"UHD"},{"nom":"CARREFOUR MARKET RADES","enseigne":"UHD"},{"nom":"CARREFOUR MARKET RUE DE LONDRE","enseigne":"UHD"},{"nom":"CARREFOUR MARKET SIDI MANSOUR","enseigne":"UHD"},{"nom":"CARREFOUR MARKET SILIANA","enseigne":"UHD"},{"nom":"CARREFOUR MARKET SOUKRA CITY","enseigne":"UHD"},{"nom":"CARREFOUR MARKET TATAOUINE","enseigne":"UHD"},{"nom":"CARREFOUR MARKET TOZEUR","enseigne":"UHD"},{"nom":"CARREFOUR MARKET URBAIN NORD","enseigne":"UHD"},{"nom":"CARREFOUR MARKET YASMINET","enseigne":"UHD"},{"nom":"CARREFOUR MARKET ZARZIS","enseigne":"UHD"},{"nom":"CARREFOUR UNIMARKET BORJ LOUZIR 2","enseigne":"UHD"},{"nom":"CASH & CARRY BIR EL KASSAA","enseigne":"CASH"},{"nom":"CASH UCC CHARGUIA","enseigne":"CASH"},{"nom":"CHAMPION  LAFAYETTE","enseigne":"UHD"},{"nom":"Carrefour Market Ain Zaghouan2 “241”","enseigne":"UHD"},{"nom":"EL MAZRAA MARKET (HRAIRIA)","enseigne":"MAZRAA"},{"nom":"EL MAZRAA MARKET (TEBOURBA 1)","enseigne":"MAZRAA"},{"nom":"EL MAZRAA MARKET (TEBOURBA 2 )","enseigne":"MAZRAA"},{"nom":"GEANT BOURGO MALL DJERBA","enseigne":"GEMO"},{"nom":"GEANT SFAX","enseigne":"GEMO"},{"nom":"LA MEDDIS GEANT HYPER AZUR CITY","enseigne":"GEMO"},{"nom":"LA MEDITERRANIENNE DE DISTRIBUT \"GEANT\"","enseigne":"GEMO"},{"nom":"M G MAXI IBN KHALDOUN","enseigne":"UHD"},{"nom":"M G MAXI MEDENINE","enseigne":"UHD"},{"nom":"M G PROXI BARDO","enseigne":"UHD"},{"nom":"M G PROXI BIZERTE","enseigne":"UHD"},{"nom":"M G PROXI CHARGUIA","enseigne":"UHD"},{"nom":"M G PROXI EL INTILAKA","enseigne":"UHD"},{"nom":"M G PROXI EL MANAR","enseigne":"UHD"},{"nom":"M G PROXI EL MENZEH CENTRE","enseigne":"UHD"},{"nom":"M G PROXI MEGRINE","enseigne":"UHD"},{"nom":"M G PROXI SIDI BOU SAID","enseigne":"UHD"},{"nom":"M.G PROXI MHAMDIA","enseigne":"UHD"},{"nom":"MAG . GENERAL EL KANTAOUI","enseigne":"UHD"},{"nom":"MAG . GENERAL MONASTIR","enseigne":"UHD"},{"nom":"MAG GENE KSAR HELLAL","enseigne":"UHD"},{"nom":"MAG GENER BORJ CEDRIA","enseigne":"UHD"},{"nom":"MAG. GENERAL MAHDIA","enseigne":"MG"},{"nom":"MAG. GENERAL NEJMA","enseigne":"MG"},{"nom":"MAG. GENRAL MARINA MONASTIR","enseigne":"UHD"},{"nom":"MAGASIN GENERAL","enseigne":"MG"},{"nom":"MAGASIN GENERAL  BEJA","enseigne":"MG"},{"nom":"MAGASIN GENERAL (MADINA JADIDA)","enseigne":"MG"},{"nom":"MAGASIN GENERAL (MENZAH 7)","enseigne":"MG"},{"nom":"MAGASIN GENERAL (SIDI BOUZID)","enseigne":"MG"},{"nom":"MAGASIN GENERAL (ZARZIS)","enseigne":"MG"},{"nom":"MAGASIN GENERAL - RUE GHANA","enseigne":"MG"},{"nom":"MAGASIN GENERAL ARIANA","enseigne":"MG"},{"nom":"MAGASIN GENERAL ARIANA 2","enseigne":"MG"},{"nom":"MAGASIN GENERAL BAB BHAR","enseigne":"MG"},{"nom":"MAGASIN GENERAL BARDO","enseigne":"MG"},{"nom":"MAGASIN GENERAL BEJA 2","enseigne":"MG"},{"nom":"MAGASIN GENERAL BEN AROUS","enseigne":"MG"},{"nom":"MAGASIN GENERAL BIZERTE","enseigne":"MG"},{"nom":"MAGASIN GENERAL BORJ LOUZIR","enseigne":"MG"},{"nom":"MAGASIN GENERAL CHARGUIA","enseigne":"MG"},{"nom":"MAGASIN GENERAL CITE ENNASR","enseigne":"MG"},{"nom":"MAGASIN GENERAL CITE OLYMPIQUE","enseigne":"MG"},{"nom":"MAGASIN GENERAL DENDEN","enseigne":"MG"},{"nom":"MAGASIN GENERAL EL FAHS","enseigne":"MG"},{"nom":"MAGASIN GENERAL EL HAMMA","enseigne":"MG"},{"nom":"MAGASIN GENERAL EL JEM","enseigne":"MG"},{"nom":"MAGASIN GENERAL EL MAHRAGENE","enseigne":"MG"},{"nom":"MAGASIN GENERAL EL MENZEL","enseigne":"MG"},{"nom":"MAGASIN GENERAL EL MOUROUJ 3","enseigne":"MG"},{"nom":"MAGASIN GENERAL ENTILAKA","enseigne":"MG"},{"nom":"MAGASIN GENERAL EZZAHRA","enseigne":"MG"},{"nom":"MAGASIN GENERAL EZZAHRA 2","enseigne":"MG"},{"nom":"MAGASIN GENERAL EZZOUHOUR","enseigne":"MG"},{"nom":"MAGASIN GENERAL GABES MENZEL","enseigne":"MG"},{"nom":"MAGASIN GENERAL GAFSA","enseigne":"MG"},{"nom":"MAGASIN GENERAL H LIF","enseigne":"MG"},{"nom":"MAGASIN GENERAL HAMMAM-LIF","enseigne":"MG"},{"nom":"MAGASIN GENERAL HAMMAMET","enseigne":"MG"},{"nom":"MAGASIN GENERAL IBN KHALDOUN","enseigne":"MG"},{"nom":"MAGASIN GENERAL JENDOUBA","enseigne":"MG"},{"nom":"MAGASIN GENERAL KAIROUAN","enseigne":"MG"},{"nom":"MAGASIN GENERAL KANTAOUI","enseigne":"MG"},{"nom":"MAGASIN GENERAL KASSERINE","enseigne":"MG"},{"nom":"MAGASIN GENERAL KEBILI","enseigne":"MG"},{"nom":"MAGASIN GENERAL KELIBIA","enseigne":"MG"},{"nom":"MAGASIN GENERAL MAHDIA","enseigne":"MG"},{"nom":"MAGASIN GENERAL MAHRAJENE","enseigne":"MG"},{"nom":"MAGASIN GENERAL MARINA MONASTIR","enseigne":"MG"},{"nom":"MAGASIN GENERAL MAXI ARIANA","enseigne":"MG"},{"nom":"MAGASIN GENERAL MAXI BORJ CEDRIA","enseigne":"MG"},{"nom":"MAGASIN GENERAL MAXI GABES","enseigne":"MG"},{"nom":"MAGASIN GENERAL MAXI JERBA","enseigne":"MG"},{"nom":"MAGASIN GENERAL MAXI LA MARSA","enseigne":"MG"},{"nom":"MAGASIN GENERAL MAXI SFAX","enseigne":"MG"},{"nom":"MAGASIN GENERAL MAXI SOUSSE","enseigne":"MG"},{"nom":"MAGASIN GENERAL MEDINA JEDIDA","enseigne":"MG"},{"nom":"MAGASIN GENERAL MEDNINE","enseigne":"MG"},{"nom":"MAGASIN GENERAL MOKNINE","enseigne":"MG"},{"nom":"MAGASIN GENERAL MONASTIR","enseigne":"MG"},{"nom":"MAGASIN GENERAL MOUROUJ 3","enseigne":"MG"},{"nom":"MAGASIN GENERAL NABEUL","enseigne":"MG"},{"nom":"MAGASIN GENERAL NEFZA","enseigne":"MG"},{"nom":"MAGASIN GENERAL NEJMA","enseigne":"MG"},{"nom":"MAGASIN GENERAL OLYMPIQUE","enseigne":"MG"},{"nom":"MAGASIN GENERAL PORTE DE FRANCE","enseigne":"MG"},{"nom":"MAGASIN GENERAL PROXI GAFSA","enseigne":"MG"},{"nom":"MAGASIN GENERAL PROXI MHAMDIA","enseigne":"MG"},{"nom":"MAGASIN GENERAL RADES","enseigne":"MG"},{"nom":"MAGASIN GENERAL RUE GHANA","enseigne":"MG"},{"nom":"MAGASIN GENERAL SFAX","enseigne":"MG"},{"nom":"MAGASIN GENERAL SIDI BOUSAID","enseigne":"MG"},{"nom":"MAGASIN GENERAL SIDI BOUZID","enseigne":"MG"},{"nom":"MAGASIN GENERAL SILIANA","enseigne":"MG"},{"nom":"MAGASIN GENERAL SOUSSE","enseigne":"MG"},{"nom":"MAGASIN GENERAL SOUSSE 3","enseigne":"MG"},{"nom":"MAGASIN GENERAL TABARKA","enseigne":"MG"},{"nom":"MAGASIN GENERAL TABARKA (CODE SAP)","enseigne":"MG"},{"nom":"MAGASIN GENERAL TAJEROUINE","enseigne":"MG"},{"nom":"MAGASIN GENERAL TEJERWIN","enseigne":"MG"},{"nom":"MAGASIN GENERAL TOZEUR","enseigne":"MG"},{"nom":"MAGASIN GENERAL ZAGHOUAN","enseigne":"MG"},{"nom":"MAGASIN GENERAL(GABES)","enseigne":"MG"},{"nom":"MAGASIN GENERAL(LE KEF)","enseigne":"MG"},{"nom":"MAGASIN GENERALE LE KEF","enseigne":"MG"},{"nom":"MAGASIN GENERALE MAXI DJERBA","enseigne":"MG"},{"nom":"MAGASIN GENERALE METLAOUI","enseigne":"MG"},{"nom":"MAGASIN GENERALE ZARZIS","enseigne":"MG"},{"nom":"MAGASIN GLE EZZAHRA II","enseigne":"UHD"},{"nom":"MAGASIN GLE MOUROUJ 5","enseigne":"UHD"},{"nom":"MAGRO ARIANA (MG MAXI)","enseigne":"MG"},{"nom":"MAGRO DISTRIBUTION","enseigne":"MG"},{"nom":"MAGRO DISTRIBUTION SIDI RZIG","enseigne":"MG"},{"nom":"MAZRAA MARKET EL AGBA","enseigne":"MAZRAA"},{"nom":"MAZRAA MARKET FAHS","enseigne":"MAZRAA"},{"nom":"MAZRAA MARKET JEDAIDA","enseigne":"MAZRAA"},{"nom":"MAZRAA MARKET MANOUBA","enseigne":"MAZRAA"},{"nom":"MAZRAA MARKET PETITE ARIANA","enseigne":"MAZRAA"},{"nom":"MAZRAA MARKET TBORBA","enseigne":"MAZRAA"},{"nom":"MAZRAA MARKET TEBOURBA 2","enseigne":"MAZRAA"},{"nom":"MAZRAA MARKET TESTOUR","enseigne":"MAZRAA"},{"nom":"MAZRAA MARKET ZAHROUNI","enseigne":"MAZRAA"},{"nom":"MEDDIS","enseigne":"GEMO"},{"nom":"MEDDIS AZUR CIT","enseigne":"GEMO"},{"nom":"MEDDIS AZUR CITY","enseigne":"GEMO"},{"nom":"MEDDIS GEANT BOURGO MALL JERBA MIDOUN","enseigne":"GEMO"},{"nom":"MG AIN ZAGOUAN","enseigne":"MG"},{"nom":"MG BEJA CITY 43","enseigne":"MG"},{"nom":"MG BORJ LOUZIR","enseigne":"MG"},{"nom":"MG CITY AIN ZAGHOUAN","enseigne":"MG"},{"nom":"MG CITY EL FAHS","enseigne":"MG"},{"nom":"MG CITY MENZEL TEMIME","enseigne":"MG"},{"nom":"MG CITY MJEZ EL BEB","enseigne":"MG"},{"nom":"MG CITY NEFZA","enseigne":"MG"},{"nom":"MG CITY SOLIMAN","enseigne":"MG"},{"nom":"MG KRAM","enseigne":"MG"},{"nom":"MG KRAM OUEST","enseigne":"MG"},{"nom":"MG MAXI ENNASR","enseigne":"MG"},{"nom":"MG MAXI LA MARSA","enseigne":"MG"},{"nom":"MG MAXI MOUROUJ 5","enseigne":"MG"},{"nom":"MG MAXI NABEUL","enseigne":"MG"},{"nom":"MG MAXI SFAX TANIOUR","enseigne":"MG"},{"nom":"MG MENZEL TEMIME","enseigne":"MG"},{"nom":"MG PROXI ARIANA ESSOUGHRA","enseigne":"MG"},{"nom":"MG PROXI BARDO CHAKER","enseigne":"MG"},{"nom":"MG PROXI EL HAMMA","enseigne":"MG"},{"nom":"MG PROXI GAFSA CITE ENNOUR","enseigne":"MG"},{"nom":"MG PROXI GAZELLA","enseigne":"MG"},{"nom":"MG PROXI GHAZELLA","enseigne":"MG"},{"nom":"MG PROXI HRAIRIA","enseigne":"MG"},{"nom":"MG PROXI SIDI HASSINE","enseigne":"MG"},{"nom":"MG PROXI WAHAT","enseigne":"MG"},{"nom":"MG SIDI HSSINE","enseigne":"MG"},{"nom":"MINI M AGBA","enseigne":"GEMO"},{"nom":"MINI M BOUMHAL","enseigne":"GEMO"},{"nom":"MINI M BOUMHEL","enseigne":"GEMO"},{"nom":"MINI M EL AGBA","enseigne":"GEMO"},{"nom":"MINI M EL MOUROUJ","enseigne":"GEMO"},{"nom":"MINI M EL OMRANE","enseigne":"GEMO"},{"nom":"MINI M EL OMRANE SUPERIEUR","enseigne":"GEMO"},{"nom":"MINI M EZZOUHOUR","enseigne":"GEMO"},{"nom":"MINI M HAMMAM CHATT","enseigne":"GEMO"},{"nom":"MINI M HAMMAM CHOTT","enseigne":"GEMO"},{"nom":"MINI M KSAR SAID","enseigne":"GEMO"},{"nom":"MINI M MEGRINE","enseigne":"GEMO"},{"nom":"MINI M MOUROUJ","enseigne":"GEMO"},{"nom":"MINI M SOLIMAN","enseigne":"GEMO"},{"nom":"MONOPRIX (AVENUE HABIB BOURGUIBA)","enseigne":"GEMO"},{"nom":"MONOPRIX (EXPRESS) NABEUL","enseigne":"GEMO"},{"nom":"MONOPRIX (NABEUL)","enseigne":"GEMO"},{"nom":"MONOPRIX AIN ZAGHOUAN","enseigne":"GEMO"},{"nom":"MONOPRIX ARIANA","enseigne":"GEMO"},{"nom":"MONOPRIX ARIANA CENTER","enseigne":"GEMO"},{"nom":"MONOPRIX BAB SOUIKA","enseigne":"GEMO"},{"nom":"MONOPRIX BARDO","enseigne":"GEMO"},{"nom":"MONOPRIX BARDO HNAYA","enseigne":"GEMO"},{"nom":"MONOPRIX BEB SOUIKA","enseigne":"GEMO"},{"nom":"MONOPRIX BEJA","enseigne":"GEMO"},{"nom":"MONOPRIX BELLEVUE","enseigne":"GEMO"},{"nom":"MONOPRIX BELLEVUE CM 47","enseigne":"GEMO"},{"nom":"MONOPRIX BENI KHALLED","enseigne":"GEMO"},{"nom":"MONOPRIX BIZERTE","enseigne":"GEMO"},{"nom":"MONOPRIX BIZERTE SUD BIGROS 12","enseigne":"GEMO"},{"nom":"MONOPRIX BNI KHALLED","enseigne":"GEMO"},{"nom":"MONOPRIX BOUMHAL","enseigne":"GEMO"},{"nom":"MONOPRIX CARTHAGE","enseigne":"GEMO"},{"nom":"MONOPRIX CENTRAL PARK","enseigne":"GEMO"},{"nom":"MONOPRIX CHARLE DE GAULLE","enseigne":"GEMO"},{"nom":"MONOPRIX CHARLES DE GAULLE","enseigne":"GEMO"},{"nom":"MONOPRIX CITE EL KHADRA","enseigne":"GEMO"},{"nom":"MONOPRIX CITE EL KHADRA CM 60","enseigne":"GEMO"},{"nom":"MONOPRIX DOUAR HICHER","enseigne":"GEMO"},{"nom":"MONOPRIX EL MANAR","enseigne":"GEMO"},{"nom":"MONOPRIX EL MENZAH","enseigne":"GEMO"},{"nom":"MONOPRIX EL MENZAH XI","enseigne":"GEMO"},{"nom":"MONOPRIX EL MOEZ","enseigne":"GEMO"},{"nom":"MONOPRIX EL MOUROUJ","enseigne":"GEMO"},{"nom":"MONOPRIX EL MOUROUJ 1","enseigne":"GEMO"},{"nom":"MONOPRIX ELMAHARI","enseigne":"GEMO"},{"nom":"MONOPRIX ENNASER","enseigne":"GEMO"},{"nom":"MONOPRIX ENNASR 1","enseigne":"GEMO"},{"nom":"MONOPRIX ENNASR 1 ( 88)","enseigne":"GEMO"},{"nom":"MONOPRIX ENNASR 2 (91)","enseigne":"GEMO"},{"nom":"MONOPRIX ESSAADI","enseigne":"GEMO"},{"nom":"MONOPRIX EZZAHRA","enseigne":"GEMO"},{"nom":"MONOPRIX GABES","enseigne":"GEMO"},{"nom":"MONOPRIX GLOULOU","enseigne":"GEMO"},{"nom":"MONOPRIX HNAYA","enseigne":"GEMO"},{"nom":"MONOPRIX JARDIN D'EL MENZAH","enseigne":"GEMO"},{"nom":"MONOPRIX JENDOUBA","enseigne":"GEMO"},{"nom":"MONOPRIX KAIROUAN","enseigne":"GEMO"},{"nom":"MONOPRIX KANTAOUI","enseigne":"GEMO"},{"nom":"MONOPRIX KEF","enseigne":"GEMO"},{"nom":"MONOPRIX KELIBIA","enseigne":"GEMO"},{"nom":"MONOPRIX KORBA","enseigne":"GEMO"},{"nom":"MONOPRIX KSAR HELAL","enseigne":"GEMO"},{"nom":"MONOPRIX KSAR HELEL","enseigne":"GEMO"},{"nom":"MONOPRIX L AOUINA","enseigne":"GEMO"},{"nom":"MONOPRIX L'AOUINA","enseigne":"GEMO"},{"nom":"MONOPRIX LA MARSA","enseigne":"GEMO"},{"nom":"MONOPRIX LAC","enseigne":"GEMO"},{"nom":"MONOPRIX LAFAYETTE","enseigne":"GEMO"},{"nom":"MONOPRIX LE KEF","enseigne":"GEMO"},{"nom":"MONOPRIX LE KRAM","enseigne":"GEMO"},{"nom":"MONOPRIX LE PRINTEMPS","enseigne":"GEMO"},{"nom":"MONOPRIX LES JARDINS DE CARTHAGE","enseigne":"GEMO"},{"nom":"MONOPRIX MAHDIA","enseigne":"GEMO"},{"nom":"MONOPRIX MANOUBA","enseigne":"GEMO"},{"nom":"MONOPRIX MATEUR","enseigne":"GEMO"},{"nom":"MONOPRIX MENZEL TEMIME","enseigne":"GEMO"},{"nom":"MONOPRIX MHAMDIA","enseigne":"GEMO"},{"nom":"MONOPRIX ML BOURGUIBA","enseigne":"GEMO"},{"nom":"MONOPRIX MOKNINE","enseigne":"GEMO"},{"nom":"MONOPRIX MONASTIR","enseigne":"GEMO"},{"nom":"MONOPRIX MONASTIR ABSORBA","enseigne":"GEMO"},{"nom":"MONOPRIX MONASTIR ABSORBA CM 85","enseigne":"GEMO"},{"nom":"MONOPRIX MOUROUJ 1","enseigne":"GEMO"},{"nom":"MONOPRIX MOUROUJ 2","enseigne":"GEMO"},{"nom":"MONOPRIX MSAKEN","enseigne":"GEMO"},{"nom":"MONOPRIX NABEUL","enseigne":"GEMO"},{"nom":"MONOPRIX NEFZA","enseigne":"GEMO"},{"nom":"MONOPRIX RDAYEF","enseigne":"GEMO"},{"nom":"MONOPRIX RIADH EL ANDALOUS","enseigne":"GEMO"},{"nom":"MONOPRIX SERS","enseigne":"GEMO"},{"nom":"MONOPRIX SFAX 2000","enseigne":"GEMO"},{"nom":"MONOPRIX SFAX 63 CENTRE","enseigne":"GEMO"},{"nom":"MONOPRIX SFAX CENTRE","enseigne":"GEMO"},{"nom":"MONOPRIX SFAX MEHARI","enseigne":"GEMO"},{"nom":"MONOPRIX SIDI BOUZID","enseigne":"GEMO"},{"nom":"MONOPRIX SILIANA","enseigne":"GEMO"},{"nom":"MONOPRIX SOUKRA (19)","enseigne":"GEMO"},{"nom":"MONOPRIX SOUKRA CMR34","enseigne":"GEMO"},{"nom":"MONOPRIX SOUKRA SQUARE","enseigne":"GEMO"},{"nom":"MONOPRIX SOUKRA ZAYATINE CM 90","enseigne":"GEMO"},{"nom":"MONOPRIX SOUSSE EL AKWAS","enseigne":"GEMO"},{"nom":"MONOPRIX SOUSSE MESSAI 26","enseigne":"GEMO"},{"nom":"MONOPRIX TABARKA","enseigne":"GEMO"},{"nom":"MONOPRIX TROCADERO","enseigne":"GEMO"},{"nom":"MONOPRIX ZAGHOUAN","enseigne":"GEMO"},{"nom":"MONOPRIX ZAGHOUENE","enseigne":"GEMO"},{"nom":"MONOPRIX ZAOUIET KONTECH","enseigne":"GEMO"},{"nom":"MONOPRIX ZAOUIT KONTECH","enseigne":"GEMO"},{"nom":"MONOPRIX ZAPHYR","enseigne":"GEMO"},{"nom":"MONOPRIX ZEPHYR","enseigne":"GEMO"},{"nom":"MONOPRIX- LE SERS","enseigne":"GEMO"},{"nom":"MONOPRIX-MONASTIR","enseigne":"GEMO"},{"nom":"MONOPRIX-SOUSSE TROCADO","enseigne":"GEMO"},{"nom":"SNMVT BIGROS","enseigne":"GEMO"},{"nom":"SNMVT DJERBA","enseigne":"GEMO"},{"nom":"SNMVT EL MANAR","enseigne":"GEMO"},{"nom":"SNMVT EL MOEZ","enseigne":"GEMO"},{"nom":"SNMVT GAMMARTH","enseigne":"GEMO"},{"nom":"SNMVT JARDINS D'EL MANZEH 2","enseigne":"GEMO"},{"nom":"SNMVT KORBA","enseigne":"GEMO"},{"nom":"SNMVT LE KRAM","enseigne":"GEMO"},{"nom":"SNMVT MEDENINE","enseigne":"GEMO"},{"nom":"SNMVT SAADI MANZAH","enseigne":"GEMO"},{"nom":"SNMVT SOUKRA","enseigne":"GEMO"},{"nom":"SNMVT SOUSSE","enseigne":"GEMO"},{"nom":"SNMVT SOUSSE 2","enseigne":"GEMO"},{"nom":"SNMVT ZARZIS","enseigne":"GEMO"},{"nom":"SNMVT-MONOPRIX JERBA","enseigne":"GEMO"},{"nom":"SNMVT-MONOPRIX MEDENINE","enseigne":"GEMO"},{"nom":"SNMVT-MONOPRIX ZARZIS","enseigne":"GEMO"},{"nom":"SOCIETE AZIZA DE COMMERCE - SFAX","enseigne":"AZIZA"},{"nom":"SOCIETE AZIZA DE COMMERCE SFAX","enseigne":"AZIZA"},{"nom":"SOCIETE EL MAZRAA MARKET","enseigne":"MAZRAA"},{"nom":"SOCIETE EL MAZRAA MARKET BOUMHAL","enseigne":"MAZRAA"},{"nom":"SOCIETE MAGASIN GENERAL MAGRO EL MANAR","enseigne":"MG"},{"nom":"SOCIETE MAGASIN GENERAL MAGRO MEGRINE","enseigne":"MG"},{"nom":"SORIMEX","enseigne":"UHD"},{"nom":"STE AZIZA DE CCE SFAX","enseigne":"AZIZA"},{"nom":"STE AZIZA DE COMMERCE","enseigne":"AZIZA"},{"nom":"STE AZIZA DE COMMERCE BEN AROUS","enseigne":"AZIZA"},{"nom":"STE AZIZA DE COMMERCE BOUARGOUB","enseigne":"AZIZA"},{"nom":"STE AZIZA DE COMMERCE DE DETAIL","enseigne":"AZIZA"},{"nom":"STE AZIZA DE COMMERCE DE DETAIL BOUARGOUB","enseigne":"AZIZA"},{"nom":"STE AZIZA DE COMMERCE DE DETAIL- SOUSSE","enseigne":"AZIZA"},{"nom":"STE AZIZA DE COMMERCE SOUSSE","enseigne":"AZIZA"},{"nom":"STE EL MAZRAA MARKET","enseigne":"MAZRAA"},{"nom":"STE MAGASIN GENERALE TOZEUR","enseigne":"MG"},{"nom":"STE TUNISIENNE DE COMMERCE STC","enseigne":"UHD"},{"nom":"STE ULYGROS (PROMOCASH SOUSSE)","enseigne":"CASH"},{"nom":"STE ULYGROS(PROMOCASH CHARGUIA)","enseigne":"CASH"},{"nom":"STE ULYSSE CASH & CARRY","enseigne":"CASH"},{"nom":"STE ULYSSE CASH AND CARRY UCC","enseigne":"CASH"},{"nom":"Ste ULYSSE CASH&CARRY SOUSSE","enseigne":"CASH"},{"nom":"TOUTA NABEUL","enseigne":"UHD"},{"nom":"U H D CARREFOUR EXPRESS ENNASR 2","enseigne":"UHD"},{"nom":"U H D CHAMPION EL MENZAH 9","enseigne":"UHD"},{"nom":"U H D CITE LA GHAZELLE","enseigne":"UHD"},{"nom":"U H D SUPER ENNASR 2","enseigne":"UHD"},{"nom":"U H D SUPER MANOUBA","enseigne":"UHD"},{"nom":"U H D SUPER OUED ELLIL","enseigne":"UHD"},{"nom":"U H D SUPER SAINT GOBAIN MEGRINE","enseigne":"UHD"},{"nom":"U H D SUPER ZAGHOUAN","enseigne":"UHD"},{"nom":"U.H.D(MAGASIN CHAMPION SOUSSE)","enseigne":"UHD"},{"nom":"UHD (63-SUPER BEJA 2 )","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER AKOUDA SOUSSE","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER BEJA 2","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER BIZERTE","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER DJERBA HOUMET ESSOUK","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER DJERBA MIDOUN","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER ENNASR","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER ERRIADH SOUSSE","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER KELIBIA","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER KHEZAMA SOUSSE","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER KORBA","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER LA MARSA","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER OUED ELILL","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER RAOUED","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER RAS DJEBEL","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER ROUTE GABES SFAX","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER SAHLOUL SOUSSE","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER SAINT GOBAIN","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER TROCADERO SOUSSE","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER ZAGHOUAN","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER ZARZIS","enseigne":"UHD"},{"nom":"UHD (CHAMPION) SUPER ZARZOUNA","enseigne":"UHD"},{"nom":"UHD (CHAMPOIN) SUPER LE KRAM","enseigne":"UHD"},{"nom":"UHD AIN ZAGHOUAN","enseigne":"UHD"},{"nom":"UHD AVENUE DE LONDRES","enseigne":"UHD"},{"nom":"UHD AÏN ZAGHOUAN","enseigne":"UHD"},{"nom":"UHD BAB JAZIRA","enseigne":"UHD"},{"nom":"UHD C.EXPRESS MENZEL CHAKER","enseigne":"UHD"},{"nom":"UHD C.EXPRESS SILVER MALL SOUKRA","enseigne":"UHD"},{"nom":"UHD C.MARKET TATAOUINE","enseigne":"UHD"},{"nom":"UHD C.MARKET ZARZIS 2","enseigne":"UHD"},{"nom":"UHD CARR.MARKET KSAR SAID","enseigne":"UHD"},{"nom":"UHD CARREFOUR BOUSALEM","enseigne":"UHD"},{"nom":"UHD CARREFOUR MARKET CHAHIYIA","enseigne":"UHD"},{"nom":"UHD CARREFOUR MARKET GABES","enseigne":"UHD"},{"nom":"UHD CARREFOUR MARKET GHZELA","enseigne":"UHD"},{"nom":"UHD CARREFOUR MARKET HAMMEM SOUSSE","enseigne":"UHD"},{"nom":"UHD CARREFOUR MARKET JAMMEL","enseigne":"UHD"},{"nom":"UHD CARREFOUR MARKET JEMMEL","enseigne":"UHD"},{"nom":"UHD CARREFOUR MARKET JERBA HOUMET ESSOUK 2","enseigne":"UHD"},{"nom":"UHD CARREFOUR MARKET LAC II","enseigne":"UHD"},{"nom":"UHD CARREFOUR MARKET MOUROUJ II","enseigne":"UHD"},{"nom":"UHD CARREFOUR MARKET SIDI SALAH","enseigne":"UHD"},{"nom":"UHD CARREFOUR MARKET SILIANA","enseigne":"UHD"},{"nom":"UHD CARREFOUR MARKET TOZEUR","enseigne":"UHD"},{"nom":"UHD CARREFOUR SUPER DOUZ","enseigne":"UHD"},{"nom":"UHD CENTRE URBAIN NORD","enseigne":"UHD"},{"nom":"UHD CHAMPION","enseigne":"UHD"},{"nom":"UHD CHIHIA","enseigne":"UHD"},{"nom":"UHD CM BORJ CEDRIA","enseigne":"UHD"},{"nom":"UHD CM MANAR CITY","enseigne":"UHD"},{"nom":"UHD EXPRESS AIN ZAGHOUAN 2","enseigne":"UHD"},{"nom":"UHD EXPRESS FOUCHANA","enseigne":"UHD"},{"nom":"UHD EXPRESS HAMMAM-LIF","enseigne":"UHD"},{"nom":"UHD EXPRESS LAOUINA","enseigne":"UHD"},{"nom":"UHD EXPRESS MENZEL TEMIME","enseigne":"UHD"},{"nom":"UHD EXPRESS SALAMBO","enseigne":"UHD"},{"nom":"UHD EXPRESS SIDI SALAH","enseigne":"UHD"},{"nom":"UHD GAFSA","enseigne":"UHD"},{"nom":"UHD GAMMARTH","enseigne":"UHD"},{"nom":"UHD HYPER MALL OF SFAX","enseigne":"UHD"},{"nom":"UHD HYPER MALL OF SOUSSE","enseigne":"UHD"},{"nom":"UHD KRAM 5 DECEMBRE","enseigne":"UHD"},{"nom":"UHD KSAR SAID","enseigne":"UHD"},{"nom":"UHD MANAR EL AREM","enseigne":"UHD"},{"nom":"UHD MORNAGUIA","enseigne":"UHD"},{"nom":"UHD MOUROUJ 2","enseigne":"UHD"},{"nom":"UHD MOUROUJ 4","enseigne":"UHD"},{"nom":"UHD MREZGA HAMMAMET","enseigne":"UHD"},{"nom":"UHD SALAMBO","enseigne":"UHD"},{"nom":"UHD SOUSSE MALL","enseigne":"UHD"},{"nom":"UHD SUPER AKOUDA","enseigne":"UHD"},{"nom":"UHD SUPER BEJA","enseigne":"UHD"},{"nom":"UHD SUPER BEJA 3","enseigne":"UHD"},{"nom":"UHD SUPER BIZERTE","enseigne":"UHD"},{"nom":"UHD SUPER BOUMHEL","enseigne":"UHD"},{"nom":"UHD SUPER BOUSSALSLA","enseigne":"UHD"},{"nom":"UHD SUPER CENTRE URBAIN NORD","enseigne":"UHD"},{"nom":"UHD SUPER CENTRE VILLE MAHDIA","enseigne":"UHD"},{"nom":"UHD SUPER DJERBA H.S","enseigne":"UHD"},{"nom":"UHD SUPER DJERBA H.S II","enseigne":"UHD"},{"nom":"UHD SUPER DJERBA MIDOUNE","enseigne":"UHD"},{"nom":"UHD SUPER DJERBA MIDOUNE II","enseigne":"UHD"},{"nom":"UHD SUPER EL MANAR","enseigne":"UHD"},{"nom":"UHD SUPER EL MOUROUJ","enseigne":"UHD"},{"nom":"UHD SUPER ERRIADH","enseigne":"UHD"},{"nom":"UHD SUPER GAFSA","enseigne":"UHD"},{"nom":"UHD SUPER GROMBALIA","enseigne":"UHD"},{"nom":"UHD SUPER INTILAKA","enseigne":"UHD"},{"nom":"UHD SUPER JARZOUNA","enseigne":"UHD"},{"nom":"UHD SUPER JAWHARA SOUSSE","enseigne":"UHD"},{"nom":"UHD SUPER KELIBIA","enseigne":"UHD"},{"nom":"UHD SUPER KHEZAMA","enseigne":"UHD"},{"nom":"UHD SUPER KHEZAMA  2","enseigne":"UHD"},{"nom":"UHD SUPER KORBA","enseigne":"UHD"},{"nom":"UHD SUPER KSAR HELAL","enseigne":"UHD"},{"nom":"UHD SUPER LA MARSA","enseigne":"UHD"},{"nom":"UHD SUPER LAFRANE SFAX","enseigne":"UHD"},{"nom":"UHD SUPER LE KRAM","enseigne":"UHD"},{"nom":"UHD SUPER MEDINA JEDIDA","enseigne":"UHD"},{"nom":"UHD SUPER MENZEL BOURGUIBA","enseigne":"UHD"},{"nom":"UHD SUPER MHAMDIA","enseigne":"UHD"},{"nom":"UHD SUPER NABEUL 2","enseigne":"UHD"},{"nom":"UHD SUPER RAOUED","enseigne":"UHD"},{"nom":"UHD SUPER RAS DJEBEL","enseigne":"UHD"},{"nom":"UHD SUPER RTE DE GABES","enseigne":"UHD"},{"nom":"UHD SUPER SAHLOUL SOUSSE","enseigne":"UHD"},{"nom":"UHD SUPER SFAX JEDIDA","enseigne":"UHD"},{"nom":"UHD SUPER SIDI MANSOUR","enseigne":"UHD"},{"nom":"UHD SUPER TROCADERO","enseigne":"UHD"},{"nom":"UHD SUPER ZARZIS","enseigne":"UHD"},{"nom":"ULYSSE HYPER DIST(CARREFOUR)","enseigne":"UHD"},{"nom":"ULYSSE HYPER DISTRIB","enseigne":"UHD"},{"nom":"ULYSSE HYPER DISTRIBUTION CARREFOUR","enseigne":"UHD"}];
+/* ⚠️⚠️ REMETS TES GRANDES LISTES ICI ENTRE LES CROCHETS [ ] ⚠️⚠️ */
+const COMMERCIAUX = [{"nom":"MOURAD BAHLOUSS","usine":"STBN"},{"nom":"MOUNIR BEN ALI","usine":"SGBIA"}];
+const PRODUITS = [{"id":"coca_cola_pet_100cl","nom":"COCA-COLA PET 100CL","marque":"COCA-COLA","color":"#e62229"},{"id":"boga_cidre_pet_100cl","nom":"BOGA CIDRE PET 100CL","marque":"BOGA","color":"#1a56db"}];
+const MAGASINS_RAW = [{"nom":"CARREFOUR MARKET BEN AROUS","enseigne":"UHD"},{"nom":"MAGASIN GENERAL EZZAHRA","enseigne":"MG"}];
+/* ⚠️⚠️ FIN DES LISTES ⚠️⚠️ */
 
 let selectedMagasin = null;
 let qtyObs = {};
 let qtyAug = {};
+let localVisits = []; // Mémoire locale temporaire
 
 window.onload = function init() {
-  updateClock();
-  setInterval(updateClock, 30000);
+  updateClock(); setInterval(updateClock, 30000);
   document.getElementById('sel-date').value = new Date().toISOString().split('T')[0];
 
+  // Remplir sélecteur commerciaux
   const selC = document.getElementById('sel-commercial');
   COMMERCIAUX.forEach(c => {
-      const o = document.createElement('option');
-      o.value = c.nom; o.textContent = c.nom + ' (' + c.usine + ')';
-      selC.appendChild(o);
+      const o = document.createElement('option'); o.value = c.nom; o.textContent = c.nom; selC.appendChild(o);
   });
 
   PRODUITS.forEach(p => { qtyObs[p.id] = 0; qtyAug[p.id] = 0; });
   renderProducts();
+  loadLocalVisits();
 
+  // Recherche Magasin
   document.getElementById('mag-input').addEventListener('input', e => {
     renderMagDropdown(e.target.value);
     document.getElementById('mag-dropdown').classList.add('open');
   });
-  
   document.addEventListener('click', e => {
-    if (!e.target.closest('.search-select-wrap')) {
-      document.getElementById('mag-dropdown').classList.remove('open');
-    }
+    if (!e.target.closest('.search-select-wrap')) document.getElementById('mag-dropdown').classList.remove('open');
   });
 }
 
@@ -193,31 +202,24 @@ function switchTab(tab) {
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('page-' + tab).classList.add('active');
   document.getElementById('tab-' + tab).classList.add('active');
-}
-
-function openMagDropdown() {
-  document.getElementById('mag-dropdown').classList.add('open');
-  renderMagDropdown(document.getElementById('mag-input').value);
+  if(tab === 'dashboard' || tab === 'stats') updateDashboardAndStats();
 }
 
 function renderMagDropdown(q) {
   const dd = document.getElementById('mag-dropdown');
   const term = q.trim().toUpperCase();
-  const filtered = MAGASINS_RAW.filter(m => m.nom.toUpperCase().includes(term) || m.enseigne.toUpperCase().includes(term)).slice(0, 50);
-
+  const filtered = MAGASINS_RAW.filter(m => m.nom.toUpperCase().includes(term) || m.enseigne.toUpperCase().includes(term)).slice(0, 30);
   if(filtered.length === 0){ dd.innerHTML = '<div class="dropdown-empty">Aucun résultat</div>'; return; }
-  
   dd.innerHTML = filtered.map(m => `
     <div class="dropdown-item" onclick="selectMagasin('${m.nom.replace(/['"\\]/g,'\\$&')}', '${m.enseigne}')">
-      <div>${m.nom}</div>
-      <div class="item-sub"><strong style="color:var(--teal)">${m.enseigne}</strong></div>
+      <div>${m.nom}</div><div class="item-sub"><strong style="color:var(--teal)">${m.enseigne}</strong></div>
     </div>
   `).join('');
 }
 
 function selectMagasin(nom, enseigne) {
   selectedMagasin = {nom, enseigne};
-  document.getElementById('mag-input').value = '';
+  document.getElementById('mag-input').value = nom;
   document.getElementById('mag-dropdown').classList.remove('open');
   document.getElementById('sm-name').textContent = nom;
   document.getElementById('sm-meta').textContent = "Enseigne : " + enseigne;
@@ -228,10 +230,7 @@ function renderProducts() {
   const container = document.getElementById('products-body');
   container.innerHTML = PRODUITS.map(p => `
     <div class="prod-row">
-        <div>
-            <div class="prod-name">${p.nom}</div>
-            <div class="prod-format" style="color:${p.color};font-weight:bold;">${p.marque}</div>
-        </div>
+        <div><div class="prod-name">${p.nom}</div><div class="prod-format" style="color:${p.color};font-weight:bold;">${p.marque}</div></div>
         <div>
             <div class="stepper-label">Observé</div>
             <div class="stepper">
@@ -253,47 +252,60 @@ function renderProducts() {
 }
 
 function updateQty(id, type, delta) {
-  if (type === 'obs') {
-      qtyObs[id] = Math.max(0, qtyObs[id] + delta);
-      document.getElementById(`val-obs-${id}`).textContent = qtyObs[id];
-      if(qtyObs[id] > 0) document.getElementById(`val-obs-${id}`).classList.add('nonzero');
-      else document.getElementById(`val-obs-${id}`).classList.remove('nonzero');
-  } else {
-      qtyAug[id] = Math.max(0, qtyAug[id] + delta);
-      document.getElementById(`val-aug-${id}`).textContent = qtyAug[id];
-      if(qtyAug[id] > 0) document.getElementById(`val-aug-${id}`).classList.add('nonzero');
-      else document.getElementById(`val-aug-${id}`).classList.remove('nonzero');
-  }
-  updateProdCount();
-}
-
-function updateProdCount(){
-  const obs = Object.values(qtyObs).reduce((a,b)=>a+b,0);
-  const aug = Object.values(qtyAug).reduce((a,b)=>a+b,0);
-  document.getElementById('prod-count').textContent = `Obs: ${obs} | +${aug}`;
+  if (type === 'obs') { qtyObs[id] = Math.max(0, qtyObs[id] + delta); document.getElementById(`val-obs-${id}`).textContent = qtyObs[id]; } 
+  else { qtyAug[id] = Math.max(0, qtyAug[id] + delta); document.getElementById(`val-aug-${id}`).textContent = qtyAug[id]; }
+  
+  const obsTot = Object.values(qtyObs).reduce((a,b)=>a+b,0);
+  const augTot = Object.values(qtyAug).reduce((a,b)=>a+b,0);
+  document.getElementById('prod-count').textContent = `Obs: ${obsTot} | +${augTot}`;
 }
 
 function submitForm() {
   const comm = document.getElementById('sel-commercial').value;
   const date = document.getElementById('sel-date').value;
-  
-  if(!comm || !selectedMagasin) {
-      alert("Veuillez sélectionner un commercial et un magasin.");
-      return;
-  }
+  if(!comm || !selectedMagasin) { alert("Veuillez sélectionner un commercial et un magasin."); return; }
 
-  const toast = document.getElementById('toast');
-  toast.classList.add('show');
-  
+  // Sauvegarde locale pour que le Dashboard marche tout de suite !
+  const totalAug = Object.values(qtyAug).reduce((a,b)=>a+b,0);
+  localVisits.push({ date: date, commercial: comm, magasin: selectedMagasin.nom, enseigne: selectedMagasin.enseigne, totalAug: totalAug });
+  localStorage.setItem('gms_visites', JSON.stringify(localVisits));
+
+  const toast = document.getElementById('toast'); toast.classList.add('show');
   setTimeout(() => {
       toast.classList.remove('show');
-      selectedMagasin = null;
-      document.getElementById('selected-mag').style.display = 'none';
+      selectedMagasin = null; document.getElementById('selected-mag').style.display = 'none';
       document.getElementById('obs-text').value = '';
       PRODUITS.forEach(p => { qtyObs[p.id] = 0; qtyAug[p.id] = 0; });
-      renderProducts();
-      updateProdCount();
-  }, 2500);
+      renderProducts(); document.getElementById('prod-count').textContent = "0";
+      document.getElementById('mag-input').value = '';
+  }, 2000);
+}
+
+function loadLocalVisits() {
+  const saved = localStorage.getItem('gms_visites');
+  if(saved) localVisits = JSON.parse(saved);
+}
+
+function updateDashboardAndStats() {
+  if(localVisits.length === 0) return;
+  
+  // Dashboard Update
+  document.getElementById('dash-tot-visites').textContent = localVisits.length;
+  document.getElementById('dash-tot-aug').textContent = localVisits.reduce((a,b)=>a+(b.totalAug||0),0);
+  
+  let htmlTable = '<table class="sm-table"><thead><tr><th>Date</th><th>Commercial</th><th>Magasin</th><th>📈</th></tr></thead><tbody>';
+  localVisits.slice().reverse().forEach(v => {
+      htmlTable += `<tr><td>${v.date}</td><td>${v.commercial}</td><td>${v.magasin}</td><td>${v.totalAug}</td></tr>`;
+  });
+  htmlTable += '</tbody></table>';
+  document.getElementById('dash-history').innerHTML = htmlTable;
+
+  // Stats Update (Simple)
+  let statsHtml = '';
+  localVisits.forEach(v => {
+      statsHtml += `<tr><td>${v.magasin}</td><td><span style="background:rgba(0,200,224,.1);color:var(--teal);padding:2px 6px;border-radius:4px;font-size:10px;">${v.enseigne}</span></td><td>1</td><td style="color:var(--orange);font-weight:bold;">${v.totalAug}</td></tr>`;
+  });
+  document.getElementById('stats-table-body').innerHTML = statsHtml;
 }
 </script>
 </body>
