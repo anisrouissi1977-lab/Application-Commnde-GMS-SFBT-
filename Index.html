@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>GMS Visit Pro — SOSTEM</title>
+<style>
+:root {
+  --bg: #060f1e; --s1: #0d1f38; --s2: #112848; --s3: #1a3560;
+  --teal: #00c8e0; --teal2: #00a0b4; --gold: #f5a623; --gold2: #d4881a;
+  --green: #22d47a; --red: #ff4d6a; --orange: #ff8c42; --purple: #a78bfa;
+  --text: #dde8f5; --muted: #6b88a8;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow-x:hidden;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;min-height:100vh;}
+
+/* ── HEADER ── */
+.app-header{ background:linear-gradient(135deg,var(--s2),var(--s3)); border-bottom:2px solid var(--teal); padding:14px 20px; display:flex;align-items:center;justify-content:space-between; position:sticky;top:0;z-index:200; box-shadow:0 4px 24px rgba(0,200,224,.15); }
+.app-logo{display:flex;align-items:center;gap:10px;}
+.app-logo .icon{font-size:1.5rem;}
+.app-logo h1{font-size:1.1rem;font-weight:700;letter-spacing:-0.3px;}
+.app-logo span{color:var(--teal);}
+.app-logo small{display:block;font-size:.65rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;}
+
+/* ── NAV TABS ── */
+.nav-tabs{display:flex;gap:4px;background:var(--s1);border-bottom:1px solid rgba(255,255,255,.07);}
+.nav-tab{ flex:1;padding:12px 8px;text-align:center;cursor:pointer; font-size:.78rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase; color:var(--muted);border-bottom:3px solid transparent; transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px; }
+.nav-tab:hover{color:var(--text);background:rgba(255,255,255,.04);}
+.nav-tab.active{color:var(--teal);border-bottom-color:var(--teal);background:rgba(0,200,224,.06);}
+
+/* ── PAGES ── */
+.page{display:none;padding:16px;max-width:720px;margin:0 auto;}
+.page.active{display:block;}
+
+/* ── CARDS ── */
+.card{ background:var(--s1);border-radius:14px; border:1px solid rgba(255,255,255,.07); margin-bottom:14px;overflow:hidden; }
+.card-head{ display:flex;align-items:center;gap:10px; padding:14px 16px 12px; border-bottom:1px solid rgba(255,255,255,.06); background:rgba(255,255,255,.02); }
+.card-head .hicon{font-size:1.2rem;}
+.card-head h3{font-size:.9rem;font-weight:700;flex:1;}
+.card-head .badge-count{ background:var(--teal);color:#000; font-size:.65rem;font-weight:800; padding:2px 8px;border-radius:20px; }
+.card-body{padding:14px 16px;}
+
+/* ── FORM ELEMENTS ── */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.form-row.full{grid-template-columns:1fr;}
+.form-group{display:flex;flex-direction:column;gap:5px;}
+.form-group label{font-size:.72rem;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.form-group select,.form-group input[type=date],.form-group textarea{ background:var(--s2);border:1.5px solid rgba(255,255,255,.1); border-radius:9px;padding:10px 12px; color:var(--text);font-size:.9rem;font-family:inherit; outline:none;transition:border-color .2s;width:100%; }
+.form-group select:focus,.form-group input:focus,.form-group textarea:focus{ border-color:var(--teal); }
+.form-group textarea{resize:vertical;min-height:80px;}
+
+/* ── SEARCHABLE SELECT ── */
+.search-select-wrap{position:relative;}
+.search-select-input{ background:var(--s2);border:1.5px solid rgba(255,255,255,.1); border-radius:9px;padding:10px 12px; color:var(--text);font-size:.9rem; outline:none;width:100%;cursor:pointer; transition:border-color .2s; }
+.search-select-input:focus{border-color:var(--teal);}
+.search-select-dropdown{ position:absolute;top:calc(100% + 4px);left:0;right:0; background:var(--s2);border:1.5px solid var(--teal); border-radius:10px;z-index:100;max-height:220px;overflow-y:auto; display:none;box-shadow:0 12px 30px rgba(0,0,0,.5); }
+.search-select-dropdown.open{display:block;}
+.dropdown-item{ padding:9px 12px;cursor:pointer;font-size:.85rem; border-bottom:1px solid rgba(255,255,255,.04); transition:background .15s; }
+.dropdown-item:hover{background:rgba(0,200,224,.12);}
+.dropdown-item .item-sub{font-size:.7rem;color:var(--muted);margin-top:1px;}
+.dropdown-empty{padding:12px;text-align:center;color:var(--muted);font-size:.85rem;}
+
+/* ── PRODUITS TABLE ── */
+.brand-group{margin-bottom:12px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.07);}
+.brand-header{ display:flex;align-items:center;gap:8px; padding:9px 12px;font-weight:700;font-size:.82rem; letter-spacing:.5px;text-transform:uppercase; }
+.brand-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.prod-row{ display:grid;grid-template-columns:1fr 130px 130px; align-items:center;gap:6px; padding:8px 12px; border-top:1px solid rgba(255,255,255,.04); background:rgba(0,0,0,.15); }
+.prod-row:nth-child(even){background:rgba(255,255,255,.02);}
+.prod-name{font-size:.82rem;color:var(--text);}
+.prod-format{font-size:.7rem;color:var(--muted);}
+
+/* ── STEPPER ── */
+.stepper{ display:flex;align-items:center;gap:4px; background:var(--bg);border:1px solid rgba(255,255,255,.1); border-radius:8px;padding:3px; }
+.stepper-btn{ width:30px;height:30px;border:none;border-radius:6px; cursor:pointer;font-size:1rem;font-weight:700; display:flex;align-items:center;justify-content:center; transition:all .15s;flex-shrink:0; }
+.stepper-btn.minus{background:rgba(255,77,106,.15);color:var(--red);}
+.stepper-btn.minus:hover{background:var(--red);color:#fff;}
+.stepper-btn.plus{background:rgba(34,212,122,.15);color:var(--green);}
+.stepper-btn.plus:hover{background:var(--green);color:#fff;}
+.stepper-val{ flex:1;text-align:center;font-weight:800;font-size:.95rem; font-variant-numeric:tabular-nums;min-width:24px; }
+.stepper-val.nonzero{color:var(--teal);}
+.stepper-label{font-size:.65rem;color:var(--muted);text-align:center;margin-top:3px;letter-spacing:.5px;}
+
+/* ── SUBMIT BUTTON & TOAST ── */
+.btn-submit{ width:100%;padding:15px; background:linear-gradient(135deg,var(--teal),var(--teal2)); border:none;border-radius:12px; color:#000;font-size:1rem;font-weight:800; letter-spacing:.5px;cursor:pointer; display:flex;align-items:center;justify-content:center;gap:10px; transition:all .2s;box-shadow:0 4px 20px rgba(0,200,224,.3); margin-top:8px; }
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,200,224,.4);}
+.toast{ position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px); background:var(--green);color:#000; padding:12px 24px;border-radius:30px; font-weight:700;font-size:.9rem; transition:transform .4s cubic-bezier(.175,.885,.32,1.275); z-index:999;display:flex;align-items:center;gap:8px; box-shadow:0 8px 30px rgba(34,212,122,.4);white-space:nowrap; }
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+/* ── MAGASIN SELECT DISPLAY ── */
+.selected-magasin{ background:rgba(0,200,224,.07);border:1px solid rgba(0,200,224,.25); border-radius:9px;padding:10px 12px;margin-top:4px;display:none; }
+.selected-magasin .sm-name{font-weight:700;font-size:.9rem;}
+.selected-magasin .sm-meta{font-size:.72rem;color:var(--muted);margin-top:2px;}
+
+@media(max-width:500px){ .form-row{grid-template-columns:1fr;} .prod-row{grid-template-columns:1fr;gap:4px;} .prod-row .stepper{justify-content:flex-start;} }
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="app-logo">
+    <div class="icon">🛒</div>
+    <div>
+      <h1>GMS Visit <span>Pro</span></h1>
+      <small>SFBT · SOSTEM · Terrain</small>
+    </div>
+  </div>
+  <div style="font-size:.75rem;color:var(--muted);text-align:right;">
+    <div id="hdr-date" style="color:var(--gold);font-weight:700;"></div>
+    <div id="hdr-time"></div>
+  </div>
+</div>
+
+<div class="nav-tabs">
+  <div class="nav-tab active" onclick="switchTab('questionnaire')" id="tab-questionnaire">📋 Questionnaire</div>
+  <div class="nav-tab" onclick="switchTab('dashboard')" id="tab-dashboard">📊 Dashboard</div>
+</div>
+
+<div class="page active" id="page-questionnaire">
+  <div class="card">
+    <div class="card-head">
+      <span class="hicon">👤</span><h3>Identification de la Visite</h3>
+    </div>
+    <div class="card-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>🧑‍💼 Commercial</label>
+          <select id="sel-commercial"><option value="">— Sélectionner —</option></select>
+        </div>
+        <div class="form-group">
+          <label>📅 Date</label>
+          <input type="date" id="sel-date">
+        </div>
+      </div>
+      <div style="margin-top:10px;">
+        <label style="font-size:.72rem;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px;">🏪 Magasin Visité</label>
+        
+        <div class="search-select-wrap">
+          <input type="text" class="search-select-input" id="mag-input" placeholder="🔍 Taper pour rechercher un magasin..." autocomplete="off" onclick="openMagDropdown()">
+          <div class="search-select-dropdown" id="mag-dropdown"></div>
+        </div>
+
+        <div class="selected-magasin" id="selected-mag" style="margin-top:6px;">
+          <div class="sm-name" id="sm-name"></div>
+          <div class="sm-meta" id="sm-meta"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="hicon">🥤</span><h3>Relevé Rayon</h3>
+      <span class="badge-count" id="prod-count">0</span>
+    </div>
+    <div class="card-body" id="products-body" style="padding:8px 0;">
+      </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="hicon">📝</span><h3>Observations & Remarques</h3>
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <textarea id="obs-text" placeholder="Ex: Rupture sur BOGA, facing insuffisant..." rows="4"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-submit" onclick="submitForm()">✅ Soumettre la Visite</button>
+  <div style="height:30px;"></div>
+</div>
+
+<div class="page" id="page-dashboard">
+    <div class="card">
+        <div class="card-head"><span class="hicon">📊</span><h3>Dashboard</h3></div>
+        <div class="card-body">
+            <p style="color:var(--muted)">Historique des visites à venir ici...</p>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast">✅ Visite enregistrée avec succès !</div>
+
+<script>
+/* ⚠️ RECOLLEZ VOS TABLEAUX COMPLETS ICI (PRODUITS et MAGASINS_RAW) ⚠️ */
+const COMMERCIAUX = [
+  {nom:'MOURAD BAHLOUSS', usine:'STBN'},
+  {nom:'MOUNIR BEN ALI', usine:'SGBIA'}
+];
+
+const PRODUITS = [
+  {"id": "coca_cola_1l", "nom": "COCA-COLA PET 100CL", "marque": "COCA-COLA", "color": "#e62229"},
+  {"id": "boga_cidre_1l", "nom": "BOGA CIDRE PET 100CL", "marque": "BOGA", "color": "#1a56db"},
+  {"id": "fanta_orange_1l", "nom": "FANTA ORANGE PET 100CL", "marque": "FANTA", "color": "#ff7d00"}
+];
+
+const MAGASINS_RAW = [
+  {"nom": "CARREFOUR MARKET BEN AROUS", "enseigne": "UHD"},
+  {"nom": "MAGASIN GENERAL EZZAHRA", "enseigne": "MG"},
+  {"nom": "AZIZA DE COMMERCE BOUCHEMMA", "enseigne": "AZIZA"}
+];
+
+/* ══════════ STATE ══════════ */
+let selectedMagasin = null;
+let qtyObs = {};
+let qtyAug = {};
+
+/* ══════════ INIT ══════════ */
+window.onload = function init() {
+  updateClock();
+  setInterval(updateClock, 30000);
+  
+  // Date du jour
+  document.getElementById('sel-date').value = new Date().toISOString().split('T')[0];
+
+  // Commerciaux
+  const selC = document.getElementById('sel-commercial');
+  COMMERCIAUX.forEach(c => {
+      const o = document.createElement('option');
+      o.value = c.nom; o.textContent = c.nom;
+      selC.appendChild(o);
+  });
+
+  // Init quantities
+  PRODUITS.forEach(p => { qtyObs[p.id] = 0; qtyAug[p.id] = 0; });
+  
+  renderProducts();
+
+  // Gestion de la recherche magasin
+  document.getElementById('mag-input').addEventListener('input', e => {
+    renderMagDropdown(e.target.value);
+    document.getElementById('mag-dropdown').classList.add('open');
+  });
+  
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.search-select-wrap')) {
+      document.getElementById('mag-dropdown').classList.remove('open');
+    }
+  });
+}
+
+function updateClock() {
+  const now = new Date();
+  document.getElementById('hdr-date').textContent = now.toLocaleDateString('fr-FR', {day:'2-digit',month:'short',year:'numeric'});
+  document.getElementById('hdr-time').textContent = now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + tab).classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
+/* ══════════ MAGASINS LOGIC ══════════ */
+function openMagDropdown() {
+  document.getElementById('mag-dropdown').classList.add('open');
+  renderMagDropdown(document.getElementById('mag-input').value);
+}
+
+function renderMagDropdown(q) {
+  const dd = document.getElementById('mag-dropdown');
+  const term = q.trim().toUpperCase();
+  const filtered = MAGASINS_RAW.filter(m => m.nom.toUpperCase().includes(term) || m.enseigne.toUpperCase().includes(term)).slice(0, 50);
+
+  if(filtered.length === 0){ dd.innerHTML = '<div class="dropdown-empty">Aucun résultat</div>'; return; }
+  
+  dd.innerHTML = filtered.map(m => `
+    <div class="dropdown-item" onclick="selectMagasin('${m.nom.replace(/['"\\]/g,'\\$&')}', '${m.enseigne}')">
+      <div>${m.nom}</div>
+      <div class="item-sub"><strong style="color:var(--teal)">${m.enseigne}</strong></div>
+    </div>
+  `).join('');
+}
+
+function selectMagasin(nom, enseigne) {
+  selectedMagasin = {nom, enseigne};
+  document.getElementById('mag-input').value = '';
+  document.getElementById('mag-dropdown').classList.remove('open');
+  document.getElementById('sm-name').textContent = nom;
+  document.getElementById('sm-meta').textContent = "Enseigne : " + enseigne;
+  document.getElementById('selected-mag').style.display = 'block';
+}
+
+/* ══════════ PRODUITS LOGIC ══════════ */
+function renderProducts() {
+  const container = document.getElementById('products-body');
+  container.innerHTML = PRODUITS.map(p => `
+    <div class="prod-row">
+        <div>
+            <div class="prod-name">${p.nom}</div>
+            <div class="prod-format" style="color:${p.color}">${p.marque}</div>
+        </div>
+        
+        <div>
+            <div class="stepper-label">Observé</div>
+            <div class="stepper">
+                <button class="stepper-btn minus" onclick="updateQty('${p.id}', 'obs', -1)">-</button>
+                <div class="stepper-val" id="val-obs-${p.id}">${qtyObs[p.id]}</div>
+                <button class="stepper-btn plus" onclick="updateQty('${p.id}', 'obs', 1)">+</button>
+            </div>
+        </div>
+        
+        <div>
+            <div class="stepper-label">À Augmenter</div>
+            <div class="stepper">
+                <button class="stepper-btn minus" onclick="updateQty('${p.id}', 'aug', -1)">-</button>
+                <div class="stepper-val" id="val-aug-${p.id}">${qtyAug[p.id]}</div>
+                <button class="stepper-btn plus" onclick="updateQty('${p.id}', 'aug', 1)">+</button>
+            </div>
+        </div>
+    </div>
+  `).join('');
+}
+
+function updateQty(id, type, delta) {
+  if (type === 'obs') {
+      qtyObs[id] = Math.max(0, qtyObs[id] + delta);
+      document.getElementById(`val-obs-${id}`).textContent = qtyObs[id];
+      if(qtyObs[id] > 0) document.getElementById(`val-obs-${id}`).classList.add('nonzero');
+      else document.getElementById(`val-obs-${id}`).classList.remove('nonzero');
+  } else {
+      qtyAug[id] = Math.max(0, qtyAug[id] + delta);
+      document.getElementById(`val-aug-${id}`).textContent = qtyAug[id];
+      if(qtyAug[id] > 0) document.getElementById(`val-aug-${id}`).classList.add('nonzero');
+      else document.getElementById(`val-aug-${id}`).classList.remove('nonzero');
+  }
+}
+
+/* ══════════ SUBMIT ══════════ */
+function submitForm() {
+  const comm = document.getElementById('sel-commercial').value;
+  const date = document.getElementById('sel-date').value;
+  
+  if(!comm || !selectedMagasin) {
+      alert("Veuillez sélectionner un commercial et un magasin.");
+      return;
+  }
+
+  // Simulation de sauvegarde
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  
+  setTimeout(() => {
+      toast.classList.remove('show');
+      // Reset basique après validation
+      selectedMagasin = null;
+      document.getElementById('selected-mag').style.display = 'none';
+      document.getElementById('obs-text').value = '';
+      PRODUITS.forEach(p => { qtyObs[p.id] = 0; qtyAug[p.id] = 0; });
+      renderProducts();
+  }, 2500);
+}
+</script>
+</body>
+</html>
